@@ -3,6 +3,8 @@ from flask import Flask
 
 app = Flask(__name__)
 
+# komentarz dla zaznaczenia ze to branch Piotra
+
 
 @app.route("/")
 def my_function():
