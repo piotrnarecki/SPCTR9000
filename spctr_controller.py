@@ -26,3 +26,9 @@ def load_data():
 @app.route("/analyse_data")
 def analyse_data():
     return render_template("spctr_results.html")
+
+
+@app.route("/export_results")
+def export_results():
+    return "Data exported"
+

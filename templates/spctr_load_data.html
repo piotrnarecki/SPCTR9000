@@ -3,38 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <title>Load data</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap.css') }}">
 </head>
 <body>
 
 
-<h1> Here add data</h1>
-<p>
+<!--<h1> Here add data</h1>-->
+<!--<p>-->
 
-<button>
-   choose file
-</button>
+<!--<button>-->
+<!--   choose file-->
+<!--</button>-->
 
-</p>
-
-
-<h2> Choose parameters</h2>
-
-<p>
-
-<h3>Parameter 1</h3>
-<h3>Parameter 2</h3>
-<h3>Parameter 3</h3>
+<!--</p>-->
 
 
-</p>
+<!--<h2> Choose parameters</h2>-->
+
+<!--<p>-->
+
+<!--<h3>Parameter 1</h3>-->
+<!--<h3>Parameter 2</h3>-->
+<!--<h3>Parameter 3</h3>-->
+
+
+<!--</p>-->
 
 
 <p>
 
     <button>
-        <a href="{{ url_for('analyse_data')}}">Analyse</a>
+        <a >Analyse</a>
     </button>
 
 </p>
+
+<div class="jumbotron">
+    <h1 class="display-5">SPCTR9000</h1>
+
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-4">
+                One of three columns
+                <h1>
+                    text
+                </h1>
+
+
+                <h1>
+                    text
+                </h1>
+
+                <h1>
+                    text
+                </h1>
+
+            </div>
+            <div class="col-8">
+
+                <img src="static/results.png">
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-4">
+                One of three columns
+                <h1>
+                    text
+                </h1>
+
+
+            </div>
+            <div class="col-4">
+                One of three columns
+                <h1>
+                    text
+                </h1>
+            </div>
+
+
+            <div class="col-4">
+                One of three columns
+                <h1>
+                    text
+                </h1>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-4">
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="{{ url_for('load_data')}}" role="button">Reset</a>
+                </p>
+
+
+            </div>
+            <div class="col-4">
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="{{ url_for('export_results')}}" role="button">Export</a>
+                </p>
+
+
+            </div>
+
+
+            <div class="col-4">
+
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="{{ url_for('analyse_data')}}" role="button">Analyse</a>
+                </p>
+
+
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
 </body>
 </html>
