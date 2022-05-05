@@ -25,6 +25,14 @@ def load_data():
 
 @app.route("/analyse_data")
 def analyse_data():
+
+
+
+    # wyslij do BE
+
+    # odbierz od BE
+
+    #wyslij na FE
     return render_template("spctr_results.html")
 
 
