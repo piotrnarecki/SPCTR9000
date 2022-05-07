@@ -14,169 +14,80 @@
 
 <!--    <hr class="my-4">-->
 
+
 <div class="container">
+    <form method="post" enctype="multipart/form-data">
 
-    <div class="row">
-
-        <form method="post">
-
-            <div>
-                <div class="col-2">
+        <div class="row">
 
 
-                    <p>
+            <!--pierwsza kolumna-->
+            <div class="col-2">
 
 
-                        <!--            <form method="post">-->
+                <p>
+                    <!--Smooth-->
+                <h3>Smooth</h3>
+                <input type="radio" name="smooth_radio" id="smooth_sg" value="sg" checked>
+                <label>
+                    SG
+                </label>
+                </input>
 
 
-                    <p>
-                        <!--Smooth-->
-                    <h3>Smooth</h3>
-                    <input type="radio" name="smooth_radio" id="smooth_sg" value="sg" checked>
-                    <label>
-                        SG
-                    </label>
+                <input type="radio" name="smooth_radio" id="smooth_fft" value="fft"
+                >
+                <label>
+                    FFT
+                </label>
+                </input>
+
+                <br>
+                <label>Window size</label>
+                <input type="number" id="smooth_window_size" name="smooth_window_size" min="1" max="5" required
+                       value="1">
+                </p>
+
+                <!--Range-->
+                <p>
+
+                <h3>Range</h3>
+
+
+                <input type="radio" name="range_radio" id="range_1" checked value="range_1">
+                <label>
+                    Range 1
+                </label>
+                </input>
+
+                <br>
+                <input type="radio" name="range_radio" id="range_2" value="range_2"
+                >
+                <label>
+                    Range 2
+                </label>
+                </input>
+
+
+                <div>
+                    <input type="radio" name="range_radio" id="range_custom" value="custom_range" required>
+                    <label>Custom</label>
                     </input>
+                    <div class="reveal-if-active">
 
 
-                    <input type="radio" name="smooth_radio" id="smooth_fft" value="fft"
-                    >
-                    <label>
-                        FFT
-                    </label>
-                    </input>
+                        <label>from</label>
 
-                    <br>
-                    <label>Window size</label>
-                    <input type="number" id="smooth_window_size" name="smooth_window_size" min="1" max="5" required
-                           value="1">
-                    </p>
-
-
-                    <p>
-
-
-                        <!--Range-->
-                    <h3>Range</h3>
-
-
-                    <input type="radio" name="range_radio" id="range_1" checked value="range_1">
-                    <label>
-                        Range 1
-                    </label>
-                    </input>
-
-                    <br>
-                    <input type="radio" name="range_radio" id="range_2" value="range_2"
-                    >
-                    <label>
-                        Range 2
-                    </label>
-                    </input>
-
-
-                    <div>
-                        <input type="radio" name="range_radio" id="range_custom" value="custom_range" required>
-                        <label>Custom</label>
+                        <input type="number" id="range_from" name="range_from" min="1" max="5"
+                               class="require-if-active" value="1">
+                        <label>to</label>
                         </input>
-                        <div class="reveal-if-active">
 
 
-                            <label>from</label>
-
-                            <input type="number" id="range_from" name="range_from" min="1" max="5"
-                                   class="require-if-active" value="1">
-                            <label>to</label>
-                            </input>
-
-
-                            <input type="number" id="range_to" name="range_to" min="1" max="5" class="require-if-active"
-                                   value="2">
-                            <label></label>
-                            </input>
-
-
-                        </div>
-
-
-                    </div>
-
-                    </p>
-
-
-                    <!--    Smooth (range selected) -->
-
-                    <h3>Smooth (range selected)</h3>
-                    <input type="radio" name="smooth_range_radio" id="smooth_range_sg" value="sg" checked>
-                    <label>
-                        SG
-                    </label>
-                    </input>
-
-
-                    <input type="radio" name="smooth_range_radio" id="smooth_range_fft" value="fft"
-                    >
-                    <label>
-                        FFT
-                    </label>
-                    </input>
-
-                    <br>
-                    <label>Window size</label>
-                    <input type="number" id="smooth_range_window_size" name="smooth_range_window_size" min="1" max="5"
-                           required value="1">
-                    </p>
-
-
-                    <p>
-                        <button type="submit">Create</button>
-
-
-                    </p>
-
-
-                </div>
-
-                <div class="col-2">
-
-                    <p>
-                        druga kolumna
-                    </p>
-
-                    <!--Range-->
-                    <h3>Baseline</h3>
-
-
-                    <input type="radio" name="baseline_radio" id="baseline_auto" checked value="baseline_auto">
-                    <label>
-                        Auto
-                    </label>
-                    </input>
-
-                    <div>
-                        <input type="radio" name="baseline_radio" id="baseline_custom" value="baseline_custom" required>
-                        <label>Custom</label>
+                        <input type="number" id="range_to" name="range_to" min="1" max="5" class="require-if-active"
+                               value="2">
+                        <label></label>
                         </input>
-                        <div class="reveal-if-active">
-
-
-                            <label>from</label>
-
-                            <input type="number" id="baseline_from" name="baseline_from" min="1" max="5"
-                                   class="require-if-active" value="1">
-                            <label>to</label>
-                            </input>
-
-
-                            <input type="number" id="baseline_to" name="baseline_to" min="1" max="5"
-                                   class="require-if-active"
-                                   value="2">
-                            <label></label>
-                            </input>
-
-
-                        </div>
 
 
                     </div>
@@ -184,35 +95,245 @@
 
                 </div>
 
-                <div class="col-2">
+                </p>
 
-                    <p>
-                        trzecia kolumna
-                    </p>
 
+                <!--    Smooth (range selected) -->
+
+                <h3>Smooth (range selected)</h3>
+                <input type="radio" name="smooth_range_radio" id="smooth_range_sg" value="sg" checked>
+                <label>
+                    SG
+                </label>
+                </input>
+
+
+                <input type="radio" name="smooth_range_radio" id="smooth_range_fft" value="fft"
+                >
+                <label>
+                    FFT
+                </label>
+                </input>
+
+                <br>
+                <label>Window size</label>
+                <input type="number" id="smooth_range_window_size" name="smooth_range_window_size" min="1" max="5"
+                       required value="1">
+                </p>
+
+
+                <p>
+                <h3>Baseline</h3>
+
+                <input type="radio" name="baseline_radio" id="baseline_auto" checked value="baseline_auto">
+                <label>
+                    Auto
+                </label>
+                </input>
+
+                <div>
+                    <input type="radio" name="baseline_radio" id="baseline_custom" value="baseline_custom" required>
+                    <label>Custom</label>
+                    </input>
+                    <div class="reveal-if-active">
+
+
+                        <label>from</label>
+
+                        <input type="number" id="baseline_from" name="baseline_from" min="1" max="5"
+                               class="require-if-active" value="1">
+                        <label>to</label>
+                        </input>
+
+
+                        <input type="number" id="baseline_to" name="baseline_to" min="1" max="5"
+                               class="require-if-active"
+                               value="2">
+                        <label></label>
+                        </input>
+
+
+                    </div>
                 </div>
 
-
-                <div class="col-6">
-
-                    <img src="static/results.png">
+                </p>
 
 
-                    <!--            <form action="http://localhost:5000/load_data" method="POST"-->
-                    <!--                  enctype="multipart/form-data">-->
-                    <!--                <input type="file" name="file"-->
-                    <!--                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>-->
-                    <!--                <input type="submit"/>-->
-                    <!--            </form>-->
+                <p>
+                    <button type="submit">Create</button>
 
 
-                </div>
+                </p>
+
+
             </div>
-        </form>
 
 
-    </div>
+            <!--druga kolumna-->
+            <div class="col-2">
+                <p>
+                <h3>Data normalize</h3>
 
 
+                <input type="radio" name="data_normalize_radio" id="data_normalize_none" checked
+                       value="data_normalize_none">
+                <label>
+                    None
+                </label>
+                </input>
+
+                <br>
+
+                <input type="radio" name="data_normalize_radio" id="data_normalize_amide1"
+                       value="data_normalize_amide1">
+                <label>
+                    Relative to Amide I
+                </label>
+                </input>
+
+                <br>
+
+                <input type="radio" name="data_normalize_radio" id="data_normalize_amide2"
+                       value="data_normalize_amide2">
+                <label>
+                    Relative to Amide II
+                </label>
+                </input>
+
+
+                </p>
+
+                <p>
+
+                <h3>Smooth second derivative</h3>
+                <input type="radio" name="smooth_radio" id="smooth_derivative_sg" value="sg" checked>
+                <label>
+                    SG
+                </label>
+                </input>
+
+
+                <input type="radio" name="smooth_radio" id="smooth_derivative_fft" value="fft"
+                >
+                <label>
+                    FFT
+                </label>
+                </input>
+
+                <br>
+                <label>Window size</label>
+                <input type="number" id="smooth_derivative_window_size" name="smooth_window_size" min="1" max="5"
+                       required
+                       value="1">
+                </p>
+
+
+                <p>
+                <h3>Deconvolution</h3>
+
+
+                <input type="radio" name="deconvolution_radio" id="deconvolution_lorentz" checked
+                       value="deconvolution_lorentz">
+                <label>
+                    Lorentz
+                </label>
+                </input>
+
+                <br>
+
+                <input type="radio" name="deconvolution_radio" id="deconvolution_voigt"
+                       value="deconvolution_voigt">
+                <label>
+                    Voigt
+                </label>
+                </input>
+
+                <br>
+
+                <input type="radio" name="deconvolution_radio" id="deconvolution_gauss"
+                       value="deconvolution_gauss">
+                <label>
+                    Gauss
+                </label>
+                </input>
+
+
+                </p>
+
+                <p>
+
+                <h3>Number of bands</h3>
+
+                <div>
+                    <input type="radio" name="bands_radio" id="bands_number" value="bands_treshold" required checked>
+                    <label>Number</label>
+                    </input>
+                    <div class="reveal-if-active">
+
+
+                        <input type="number" id="number_value" name="range_from" min="1" max="5"
+                               class="require-if-active" value="1">
+                        </input>
+
+
+                    </div>
+
+                </div>
+
+
+                <div>
+                    <input type="radio" name="bands_radio" id="bands_treshold" value="bands_treshold" required>
+                    <label>Treshold %</label>
+                    </input>
+                    <div class="reveal-if-active">
+
+
+                        <input type="number" id="tresthold_value" name="tresthold_value" min="0" max="1" step="0.01"
+                               class="require-if-active" value="0.1">
+                        </input>
+
+
+                    </div>
+
+                </div>
+
+                </p>
+
+
+            </div>
+            <div class="col-2">
+
+
+                <p>
+                    placeholder
+
+                </p>
+
+
+                <p>
+                    placeholder
+
+                </p>
+
+            </div>
+            <div class="col-6">
+
+                <!--                    <form action="http://localhost:5000/load_data" method="POST"-->
+                <!--                          enctype="multipart/form-data">-->
+                <input type="file" name="file"
+                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+                <input type="submit"/>
+                <!--                    </form>-->
+
+
+            </div>
+
+
+        </div>
+
+    </form>
+
+
+</div>
 </body>
 </html>

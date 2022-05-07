@@ -6,6 +6,9 @@ from werkzeug.datastructures import FileStorage
 
 from model import db
 
+from frontend_utils.input_interpreter import InputInterpreter
+
+
 # WPISZ PONISZE KOMENTY W TERMINAL NA DOLE ABY URUCHOMIC
 # export FLASK_APP=spctr9000_controller.py
 # export FLASK_ENV=developer
@@ -25,26 +28,23 @@ def welcome():
 def load_data():
     if request.method == "POST":
 
-        smooth_type = request.form['smooth_radio']
-        smooth_window_size = request.form['smooth_window_size']
-        range = request.form['range_radio']
-
-        print("INPUT:")
-
-        print(smooth_type)
-        print(smooth_window_size)
-        print(range)
-
-        baseline = request.form['baseline_radio']
-        print(baseline)
 
 
-        if range == "custom_range":
-            range_from = request.form['range_from']
-            range_to = request.form['range_to']
-            print(range_from)
-            print(range_to)
 
+        interpreter = InputInterpreter()
+        interpreter.interpret_params(request)
+
+
+
+
+        if request.files['file'].filename != '':
+            file = request.files['file']
+            file.save(secure_filename(file.filename))
+            print(file.filename)
+            # return 'file uploaded successfully'
+        else:
+            print("file ERRRRRORRR")
+            # return redirect(url_for("load_data"))
 
 
 
