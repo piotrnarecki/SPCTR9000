@@ -4,530 +4,214 @@
     <meta charset="UTF-8">
     <title>Load data</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap.css') }}">
+    <!--    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/my_styles.css') }}">-->
+    <script type="text/javascript" src="js/reveal_form.js"></script>
 </head>
 <body>
 
 
-<div class="jumbotron">
-    <h1 class="display-5">SPCTR9000</h1>
+<!--    <h3 >SPCTR9000</h3>-->
 
-    <hr class="my-4">
+<!--    <hr class="my-4">-->
 
-    <div class="container">
+<div class="container">
 
-        <div class="row">
+    <div class="row">
 
-            <div class="col-4">
-                <h3>PARAMETERES</h3>
+        <form method="post">
 
-
-                <p>
-
-                <h5>Smooth (all spectrum)</h5>
+            <div>
+                <div class="col-2">
 
 
-                <div class="form-check">
+                    <p>
 
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
+
+                        <!--            <form method="post">-->
+
+
+                    <p>
+                        <!--Smooth-->
+                    <h3>Smooth</h3>
+                    <input type="radio" name="smooth_radio" id="smooth_sg" value="sg" checked>
+                    <label>
                         SG
                     </label>
-                </div>
+                    </input>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                           checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
+
+                    <input type="radio" name="smooth_radio" id="smooth_fft" value="fft"
+                    >
+                    <label>
                         FFT
                     </label>
-                    <label for="quantity">Window size</label>
-                    <input type="number" id="quantity" name="quantity" min="1" max="5">
+                    </input>
+
+                    <br>
+                    <label>Window size</label>
+                    <input type="number" id="smooth_window_size" name="smooth_window_size" min="1" max="5" required
+                           value="1">
+                    </p>
+
+
+                    <p>
+
+
+                        <!--Range-->
+                    <h3>Range</h3>
+
+
+                    <input type="radio" name="range_radio" id="range_1" checked value="range_1">
+                    <label>
+                        Range 1
+                    </label>
+                    </input>
+
+                    <br>
+                    <input type="radio" name="range_radio" id="range_2" value="range_2"
+                    >
+                    <label>
+                        Range 2
+                    </label>
+                    </input>
+
+
+                    <div>
+                        <input type="radio" name="range_radio" id="range_custom" value="custom_range" required>
+                        <label>Custom</label>
+                        </input>
+                        <div class="reveal-if-active">
+
+
+                            <label>from</label>
+
+                            <input type="number" id="range_from" name="range_from" min="1" max="5"
+                                   class="require-if-active" value="1">
+                            <label>to</label>
+                            </input>
+
+
+                            <input type="number" id="range_to" name="range_to" min="1" max="5" class="require-if-active"
+                                   value="2">
+                            <label></label>
+                            </input>
+
+
+                        </div>
+
+
+                    </div>
+
+                    </p>
+
+
+                    <!--    Smooth (range selected) -->
+
+                    <h3>Smooth (range selected)</h3>
+                    <input type="radio" name="smooth_range_radio" id="smooth_range_sg" value="sg" checked>
+                    <label>
+                        SG
+                    </label>
+                    </input>
+
+
+                    <input type="radio" name="smooth_range_radio" id="smooth_range_fft" value="fft"
+                    >
+                    <label>
+                        FFT
+                    </label>
+                    </input>
+
+                    <br>
+                    <label>Window size</label>
+                    <input type="number" id="smooth_range_window_size" name="smooth_range_window_size" min="1" max="5"
+                           required value="1">
+                    </p>
+
+
+                    <p>
+                        <button type="submit">Create</button>
+
+
+                    </p>
+
+
                 </div>
-                </p>
+
+                <div class="col-2">
+
+                    <p>
+                        druga kolumna
+                    </p>
+
+                    <!--Range-->
+                    <h3>Baseline</h3>
 
 
-                <!------------------------------------------------------>
-                <!--                <p>-->
-                <!--                <h5>Range analyzed</h5>-->
-
-                <!--                <div class="form-check">-->
-                <!--                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="rangeRadio1">-->
-                <!--                    <label class="form-check-label" for="flexRadioDefault1">-->
-                <!--                        A1-->
-                <!--                    </label>-->
-
-
-                <!--                </div>-->
-                <!--                <div class="form-check">-->
-
-
-                <!--                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="rangeRadio2" checked>-->
-                <!--                    <label class="form-check-label" for="flexRadioDefault2">-->
-                <!--                        A2-->
-                <!--                    </label>-->
-
-
-                <!--                </div>-->
-                <!--                <div class="form-check">-->
-
-
-                <!--                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="rangeRadio3" checked>-->
-                <!--                    <label class="form-check-label" for="flexRadioDefault2">-->
-                <!--                        From-->
-                <!--                    </label>-->
-                <!--                    <label for="quantity"></label>-->
-                <!--                    <input type="number" id="quantity2" name="quantity" min="1" max="5">-->
-
-                <!--                    <label for="quantity">to</label>-->
-                <!--                    <input type="number" id="quantity3" name="quantity" min="1" max="5">-->
-
-                <!--                </div>-->
-
-
-                <!--                </p>-->
-                <!--                &lt;!&ndash;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
-
-                <!--                <p>-->
-                <!--                <h5>Smooth (range selected)</h5>-->
-
-                <!--                <div class="form-check">-->
-                <!--                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">-->
-                <!--                    <label class="form-check-label" for="flexRadioDefault1">-->
-                <!--                        SG-->
-                <!--                    </label>-->
-
-
-                <!--                </div>-->
-
-                <!--                <div class="form-check">-->
-
-
-                <!--                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5" checked>-->
-                <!--                    <label class="form-check-label" for="flexRadioDefault2">-->
-                <!--                        FFT-->
-                <!--                    </label>-->
-                <!--                    <label for="quantity">Window size</label>-->
-                <!--                    <input type="number" id="quantity5" name="quantity" min="1" max="5">-->
-
-                <!--                </div>-->
-                <!--                </p>-->
-
-
-            </div>
-            <div class="col-8">
-
-                <img src="static/results.png">
-
-
-                <label for="avatar"></label>
-
-
-                <input id="fileSelect" type="file"
-                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
-
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-4">
-
-                <!------------------------------------------------------>
-
-
-                <p>
-                <h5>Baseline</h5>
-
-                <div class="form-check">
-
-
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="rangeRadio7" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input type="radio" name="baseline_radio" id="baseline_auto" checked value="baseline_auto">
+                    <label>
                         Auto
                     </label>
+                    </input>
+
+                    <div>
+                        <input type="radio" name="baseline_radio" id="baseline_custom" value="baseline_custom" required>
+                        <label>Custom</label>
+                        </input>
+                        <div class="reveal-if-active">
+
+
+                            <label>from</label>
+
+                            <input type="number" id="baseline_from" name="baseline_from" min="1" max="5"
+                                   class="require-if-active" value="1">
+                            <label>to</label>
+                            </input>
+
+
+                            <input type="number" id="baseline_to" name="baseline_to" min="1" max="5"
+                                   class="require-if-active"
+                                   value="2">
+                            <label></label>
+                            </input>
+
+
+                        </div>
+
+
+                    </div>
 
 
                 </div>
-                <div class="form-check">
 
+                <div class="col-2">
 
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="rangeRadio8" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        From
-                    </label>
-                    <label for="quantity"></label>
-                    <input type="number" id="quantity6" name="quantity" min="1" max="5">
-
-                    <label for="quantity">to</label>
-                    <input type="number" id="quantity7" name="quantity" min="1" max="5">
+                    <p>
+                        trzecia kolumna
+                    </p>
 
                 </div>
 
-                </p>
-                <!------------------------------------------------------>
 
-                <p>
-                <h5>Data derivative</h5>
+                <div class="col-6">
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault11">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        None
-                    </label>
-                </div>
+                    <img src="static/results.png">
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault12"
-                           checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Relative to Amide 1 </label>
+
+                    <!--            <form action="http://localhost:5000/load_data" method="POST"-->
+                    <!--                  enctype="multipart/form-data">-->
+                    <!--                <input type="file" name="file"-->
+                    <!--                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>-->
+                    <!--                <input type="submit"/>-->
+                    <!--            </form>-->
+
 
                 </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault13"
-                           checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Relative to Amide 3
-                    </label>
-
-                </div>
-
-                </p>
-
-                <!------------------------------------------------------>
-
-
-                <p>
-                <h5>Smooth second derivative</h5>
-
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault10">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        SG
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault9" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        FFT
-                    </label>
-                    <label for="quantity">Window size</label>
-                    <input type="number" id="quantity9" name="quantity" min="1" max="5">
-                </div>
-
-
-                </p>
-
-                <!------------------------------------------------------>
-
-                <p>
-                <h5>Deconvolution</h5>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault21">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Lorentz
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault22"
-                           checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Voigt
-                    </label>
-
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault23"
-                           checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Gauss
-                    </label>
-
-                </div>
-
-                </p>
-
-                <!------------------------------------------------------>
-
-                <p>
-                <h5>Number of bands</h5>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault33"
-                           checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Number
-                    </label>
-                    <label for="quantity"></label>
-                    <input type="number" id="quantity10" name="quantity" min="1" max="5">
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault32"
-                           checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Treshold
-                    </label>
-                    <label for="quantity"></label>
-                    <input type="number" id="quantity11" name="quantity" min="1" max="5">
-                </div>
-
-                </p>
-
-                <!------------------------------------------------------>
-
-
             </div>
-            <div class="col-4">
-
-
-                <p>
-
-                <h5>Preview option</h5>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault101">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        File added
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault102">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Smooth (all spectrum)
-                    </label>
-                </div>
-
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault103">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Range analyzed
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault104">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Smooth (range selected)
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault105">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Baseline
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault106">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Data normalize
-                    </label>
-                </div>
-
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault107">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Smooth second derivative
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault107">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Deconvolution
-                    </label>
-                </div>
-
-
-                </p>
-
-
-            </div>
-
-
-            <div class="col-4">
-
-
-                <p>
-
-                <h5>Export</h5>
-
-                <h6>graph to .jpg</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Smooth (all spectrum)
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Smooth (range selected)
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Baseline
-                    </label>
-                </div>
-
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked5" checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Data normalized
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked6" checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Smooth second derivative with band
-                    </label>
-                </div>
-
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked4" checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Spectrum with band
-                    </label>
-                </div>
-
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked4" checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Deconvolution
-                    </label>
-                </div>
-
-
-                </p>
-
-                <p>
-                <h6>Data to .csv</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault50">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Smooth (all spectrum)
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked50" checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Smooth (range selected)
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked52" checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Baseline
-                    </label>
-                </div>
-
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked55" checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Data normalized
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked56" checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Smooth second derivative with band
-                    </label>
-                </div>
-
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked54" checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Spectrum with band
-                    </label>
-                </div>
-
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked54" checked>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Deconvolution
-                    </label>
-                </div>
-
-
-                </p>
-
-
-            </div>
-        </div>
+        </form>
 
 
     </div>
-
-
-    <hr class="my-4">
-
-
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-4">
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="{{ url_for('load_data')}}" role="button">Reset</a>
-                </p>
-
-
-            </div>
-            <div class="col-4">
-
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="{{ url_for('analyse_data')}}" role="button">Analyse</a>
-                </p>
-
-            </div>
-
-
-            <div class="col-4">
-
-
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="{{ url_for('export_results')}}" role="button">Export</a>
-                </p>
-
-            </div>
-        </div>
-
-
-    </div>
-
-
-</div>
 
 
 </body>

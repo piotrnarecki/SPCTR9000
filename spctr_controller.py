@@ -1,6 +1,9 @@
 from flask import Flask, render_template, abort, request, url_for, flash, redirect
 
 # ...
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import FileStorage
+
 from model import db
 
 # WPISZ PONISZE KOMENTY W TERMINAL NA DOLE ABY URUCHOMIC
@@ -20,30 +23,53 @@ def welcome():
 
 @app.route("/load_data", methods=['GET', 'POST'])
 def load_data():
-    if request.method == 'POST':
+    if request.method == "POST":
 
-        messages = [{'title': 'Message One',
-                     'content': 'Message One Content'},
-                    {'title': 'Message Two',
-                     'content': 'Message Two Content'}
-                    ]
+        smooth_type = request.form['smooth_radio']
+        smooth_window_size = request.form['smooth_window_size']
+        range = request.form['range_radio']
 
-        title = request.form['title']
-        content = request.form['content']
+        print("INPUT:")
 
-        if not title:
-            flash('Title is required!')
-        elif not content:
-            flash('Content is required!')
-        else:
-            messages.append({'title': title, 'content': content})
-            return redirect(url_for("show_form"))
+        print(smooth_type)
+        print(smooth_window_size)
+        print(range)
 
-    if request.method == 'GET':
+        baseline = request.form['baseline_radio']
+        print(baseline)
+
+
+        if range == "custom_range":
+            range_from = request.form['range_from']
+            range_to = request.form['range_to']
+            print(range_from)
+            print(range_to)
+
+
+
+
+        return redirect(url_for("export_results"))
+
+
+    else:
         return render_template("spctr_load_data.html")
 
 
-@app.route("/analyse_data")
+
+@app.route('/uploader', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+
+        if request.files['file'].filename != '':
+            file = request.files['file']
+            file.save(secure_filename(file.filename))
+            print(file.filename)
+            return 'file uploaded successfully'
+        else:
+            return redirect(url_for("load_data"))
+
+
+@app.route("/analyse_data", methods=['GET', 'POST'])
 def analyse_data():
     return render_template("spctr_results.html")
 
@@ -59,29 +85,3 @@ def analyse_data():
 def export_results():
     return "Data exported"
 
-
-@app.route("/get_input", methods=["GET", "POST"])
-def get_input():
-    if request.method == "POST":
-
-        smooth_type = request.form['smooth_radio']
-        smooth_window_size = request.form['smooth_window_size']
-        range = request.form['range_radio']
-
-        print("INPUT:")
-
-        print(smooth_type)
-        print(smooth_window_size)
-        print(range)
-
-        if range == "custom_range":
-            range_from = request.form['range_from']
-            range_to = request.form['range_to']
-            print(range_from)
-            print(range_to)
-
-        return redirect(url_for("export_results"))
-
-
-    else:
-        return render_template("get_input.html")
