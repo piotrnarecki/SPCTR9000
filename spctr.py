@@ -2,7 +2,7 @@
 
 """
 
-class Spctr:
+class Spctr():
     """
     
     """
