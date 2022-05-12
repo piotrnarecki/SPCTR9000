@@ -6,7 +6,6 @@ from flask import Flask, render_template, abort, request, url_for, flash, redire
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import FileStorage
 from frontend_utils.input_parameters import InputParameters
-#sprawdz czy dziala Oliwia
 
 class InputInterpreter:
     # ta piekna funkcja bedzie pobierac dane z wejscia i przerabiac je na obiekt klasy parametry wejsciowe
