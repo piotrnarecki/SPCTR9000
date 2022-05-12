@@ -10,9 +10,9 @@ class FileInterpreter:
     def interpret_file(self, request):
         if request.files['file'].filename != '':
             file = request.files['file']
-            # file.save(secure_filename(file.filename))
+            file.save(secure_filename(file.filename))
 
-            file.save(os.path.join(app.root_path, 'input_files', secure_filename(file.filename)))
+            # file.save(os.path.join(app.root_path, 'input_files', secure_filename(file.filename)))
 
             print(file.filename)
             # return 'file uploaded successfully'
