@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 from werkzeug.datastructures import FileStorage
 from frontend_utils.input_parameters import InputParameters
 
+
 class InputInterpreter:
     # ta piekna funkcja bedzie pobierac dane z wejscia i przerabiac je na obiekt klasy parametry wejsciowe
     def interpret_params(self, request):
@@ -76,6 +77,12 @@ class InputInterpreter:
             bands_value = request.form['treshold_value']
         # print("bands type" + bands_type + " value: " + str(bands_value))
 
+        preview_option = request.form['preview_option']
+        # print("preview option: " + preview_option)
+
+        export_option = request.form['export_radio']
+        # print("export option: " + export_option)
+
         input_parameters = InputParameters(smooth_type,
                                            smooth_window_size,
                                            range_from,
@@ -89,7 +96,9 @@ class InputInterpreter:
                                            smooth_second_window_size,
                                            deconvolution_type,
                                            bands_type,
-                                           bands_value
+                                           bands_value,
+                                           preview_option,
+                                           export_option
                                            )
 
         return input_parameters

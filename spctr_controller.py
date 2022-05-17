@@ -35,12 +35,14 @@ def load_data():
         # dziala !
         print("INPUT DZIALA " + input_parameters.deconvolution_type)  # tak zeby sprawdzic czy dziala
 
+        print("INPUT DZIALA " + input_parameters.preview_option)  # tak zeby sprawdzic czy dziala
+
         # tutaj beda robione jakies czary z plikiem xD
 
         file_interpreter = FileInterpreter()
         file_interpreter.interpret_file(request)
 
-        return redirect(url_for("export_results"))
+        return redirect(url_for("analyse_data"))
 
     else:
         return render_template("spctr_load_data.html")
