@@ -68,13 +68,9 @@ class InputInterpreter:
         # print("deconvolution type: " + deconvolution_type)
 
         # number of bands
-        bands_type = request.form['bands_radio']
-        bands_value = 1
-        if bands_type == "bands_number":
-            bands_value = request.form['number_value']
 
-        else:
-            bands_value = request.form['treshold_value']
+        bands_value = request.form['number_value']
+
         # print("bands type" + bands_type + " value: " + str(bands_value))
 
         preview_option = request.form['preview_option']
@@ -95,7 +91,6 @@ class InputInterpreter:
                                            smooth_second_type,
                                            smooth_second_window_size,
                                            deconvolution_type,
-                                           bands_type,
                                            bands_value,
                                            preview_option,
                                            export_option

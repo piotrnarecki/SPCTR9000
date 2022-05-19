@@ -13,7 +13,6 @@ class InputParameters:
                  smooth_second_type,
                  smooth_second_window_size,
                  deconvolution_type,
-                 bands_type,
                  bands_value,
                  preview_option,
                  export_option
@@ -31,7 +30,6 @@ class InputParameters:
         self.smooth_second_type = smooth_second_type
         self.smooth_second_window_size = smooth_second_window_size
         self.deconvolution_type = deconvolution_type
-        self.bands_type = bands_type
         self.bands_value = bands_value
         self.preview_option = preview_option
         self.export_option = export_option

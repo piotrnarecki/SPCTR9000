@@ -42,14 +42,25 @@ def load_data():
         file_interpreter = FileInterpreter()
         file_interpreter.interpret_file(request)
 
-        return redirect(url_for("analyse_data"))
+
+
+
+        car1 = 'Porsche'
+
+        return redirect(url_for("analyse_data", car=car1))
 
     else:
         return render_template("spctr_load_data.html")
 
 
-@app.route("/analyse_data", methods=['GET', 'POST'])
-def analyse_data():
+@app.route("/analyse_data/<car>")
+def analyse_data(car):
+    # to pokazuje
+
+
+    print("oł je !")
+    print(car)
+
     return render_template("spctr_results.html")
 
     # return render_template('form_test.html')
