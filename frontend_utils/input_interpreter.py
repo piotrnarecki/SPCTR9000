@@ -23,11 +23,11 @@ class InputInterpreter:
 
         match range_type:
             case "range_1":
-                range_from = 1
-                range_to = 10
+                range_from = 1490
+                range_to = 1750
             case "range_2":
-                range_from = 5
-                range_to = 15
+                range_from = 1590
+                range_to = 1750
             case "custom_range":
                 range_from = request.form['range_from']
                 range_to = request.form['range_to']

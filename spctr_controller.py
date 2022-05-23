@@ -42,9 +42,6 @@ def load_data():
         file_interpreter = FileInterpreter()
         file_interpreter.interpret_file(request)
 
-
-
-
         car1 = 'Porsche'
 
         return redirect(url_for("analyse_data", car=car1))
@@ -57,18 +54,35 @@ def load_data():
 def analyse_data(car):
     # to pokazuje
 
-
     print("oł je !")
     print(car)
 
-    return render_template("spctr_results.html")
 
-    # return render_template('form_test.html')
-    # wyslij do BE
+    data = [
 
-    # odbierz od BE
+        (200, 120),
+        (300, 150),
+        (400, 140),
+        (500, 180),
+        (600, 200),
+        (700, 220),
+        (800, 270),
 
-    # wyslij na FE
+    ]
+
+
+    labels =[row[0] for row in data]
+    values =[row[1] for row in data]
+
+
+    return render_template("spctr_results.html", labels=labels , values=values)
+
+# return render_template('form_test.html')
+# wyslij do BE
+
+# odbierz od BE
+
+# wyslij na FE
 
 
 @app.route("/export_results")
