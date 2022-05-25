@@ -73,10 +73,10 @@ class InputInterpreter:
 
         # print("bands type" + bands_type + " value: " + str(bands_value))
 
-        preview_option = request.form['preview_option']
+        # preview_option = request.form['preview_option']
         # print("preview option: " + preview_option)
 
-        export_option = request.form['export_radio']
+        # export_option = request.form['export_radio']
         # print("export option: " + export_option)
 
         input_parameters = InputParameters(smooth_type,
@@ -91,12 +91,10 @@ class InputInterpreter:
                                            smooth_second_type,
                                            smooth_second_window_size,
                                            deconvolution_type,
-                                           bands_value,
-                                           preview_option,
-                                           export_option
+                                           bands_value
                                            )
 
         return input_parameters
 
-    def interpret_file(self, request):
-        print("file interpreter TEST")
+    # def interpret_file(self, request):
+    #     print("file interpreter TEST")

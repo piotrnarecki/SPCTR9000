@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Load data</title>
+    <title>Set parameters</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap.css') }}">
     <!--    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/my_styles.css') }}">-->
     <script type="text/javascript" src="js/reveal_form.js"></script>
     <script type="text/javascript" src="js/populate_data.js"></script>
-<!--<script src="https://cdn.jsdelivr.net/npm/charts.js@2.9.4/dist/Charts.min.js"></script>-->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <body>
@@ -89,7 +87,7 @@
                     <div class="reveal-if-active">
 
 
-                       <label>from</label>
+                        <label>from</label>
 
                         <input type="number" id="range_from" name="range_from" min="1000" max="2000"
                                class="require-if-active" value="1400">
@@ -97,7 +95,8 @@
                         </input>
 
 
-                        <input type="number" id="range_to" name="range_to" min="1000" max="2000" class="require-if-active"
+                        <input type="number" id="range_to" name="range_to" min="1000" max="2000"
+                               class="require-if-active"
                                value="1600">
                         <label></label>
                         </input>
@@ -283,122 +282,16 @@
 
             </div>
 
-            <div class="col-6">
-
-
-<!--                <svg width="100%" height="90%">-->
-<!--                    <rect width="500" height="500" style="fill:rgb(128,0,0);stroke-width:3;stroke:rgb(0,0,0)"/>-->
-
-
-
-<!--                </svg>-->
-
-<canvas id="lineChart" width="500" height="500"></canvas>
-<script>
-    var ctx=document.getElementById("lineChart").getContext("2d");
-    var lineChart = new Chart(ctx,{
-        type: "line",
-        data:{
-            labels: {{labels | safe}},
-            datasets:[
-            {
-            label:"Data points",
-            data:{{values | safe}},
-            fill:false,
-            borderColor: "rgb(75,192,192)",
-            lineTension: 0.1
-            }
-        ]
-        },
-    options:{
-            responsive:false
-    }
-    });
-
-
-
-</script>
-
-                <input type="file" name="file"
-                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
-                <input type="submit"/>
-
-
-            </div>
 
             <div class="col-2">
 
-                <p>
-
-                <h5>Preview option</h5>
-                <!--                    <label for="preview_option">Preview option</label>-->
-                <select id="preview_option" name="preview_option">
-                    <option value="smooth_all_spectrum">Smooth (all spectrum)</option>
-                    <option value="range_analyzed">Range analyzed</option>
-                    <option value="smooth_rang_selected">Smooth (range selected)</option>
-                    <option value="baseline">Baseline</option>
-                    <option value="data_normalize">Data normalize</option>
-                    <option value="smooth_second_derivative">Smooth second derivative</option>
-                    <option value="deconvolution">Deconvolution</option>
-
-                </select>
-                <!--                    <input type="submit" value="Submit">-->
-                </p>
 
                 <p>
-                <h5>Export option</h5>
-
-
-                <input type="radio" name="export_radio" id="jpg" checked
-                       value="jpg">
-                <label>
-                    graph to jpg
-                </label>
-                </input>
-
-                <br>
-
-                <input type="radio" name="export_radio" id="csv"
-                       value="csv">
-                <label>
-                    data to csv
-                </label>
-                </input>
-
-                <br>
-
-
-                </input>
+                    <button type="submit">Analyze</button>
 
 
                 </p>
 
-                <p>
-                    <button>
-                        <a href="{{ url_for('export_results')}}">Export</a>
-                    </button>
-
-                </p>
-
-
-                <p>
-
-                    <button>
-                        <a href="{{ url_for('load_data')}}">Restart</a>
-                    </button>
-
-
-                </p>
-
-
-                <!--                <p>-->
-
-                <!--                    <button>-->
-                <!--                        <a href="{{ url_for('load_data')}}">Restart</a>-->
-                <!--                    </button>-->
-
-
-                <!--                </p>-->
 
             </div>
 
@@ -410,5 +303,10 @@
 
 
 </div>
+
+<footer>
+
+    <h1 align="center">Footer</h1>
+</footer>
 </body>
 </html>

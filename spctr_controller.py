@@ -8,6 +8,9 @@ from frontend_utils.input_interpreter import InputInterpreter
 from frontend_utils.input_parameters import InputParameters
 from frontend_utils.file_interpreter import FileInterpreter
 
+app = Flask(__name__)
+
+
 # WPISZ PONISZE KOMENTY W TERMINAL NA DOLE ABY URUCHOMIC
 # export FLASK_APP=spctr9000_controller.py
 # export FLASK_ENV=developer
@@ -15,16 +18,27 @@ from frontend_utils.file_interpreter import FileInterpreter
 # flask run
 
 
-app = Flask(__name__)
+@app.route("/", methods=['GET', 'POST'])
+def get_file():
+    if request.method == 'POST':
+
+        # tutaj beda robione jakies czary z plikiem xD
+
+        file_interpreter = FileInterpreter()
+        is_file_correct = file_interpreter.interpret_file(request)
+
+        if (is_file_correct):
+            return redirect(url_for("get_params"))
+        else:
+            return "WRONG !"
 
 
-@app.route("/")
-def welcome():
-    return render_template("spctr_welcome.html")
+    else:
+        return render_template("get_file.html")
 
 
-@app.route("/load_data", methods=['GET', 'POST'])
-def load_data():
+@app.route("/get_params", methods=['GET', 'POST'])
+def get_params():
     if request.method == "POST":
 
         input_interpreter = InputInterpreter()
@@ -35,47 +49,40 @@ def load_data():
         # dziala !
         print("INPUT DZIALA " + input_parameters.deconvolution_type)  # tak zeby sprawdzic czy dziala
 
-        print("INPUT DZIALA " + input_parameters.preview_option)  # tak zeby sprawdzic czy dziala
-
-        # tutaj beda robione jakies czary z plikiem xD
-
-        file_interpreter = FileInterpreter()
-        file_interpreter.interpret_file(request)
+        # print("INPUT DZIALA " + input_parameters.preview_option)  # tak zeby sprawdzic czy dziala
 
         car1 = 'Porsche'
 
-        return redirect(url_for("analyse_data", car=car1))
+        return redirect(url_for("show_results", car=car1))
 
     else:
-        return render_template("spctr_load_data.html")
+        return render_template("get_params.html")
 
 
-@app.route("/analyse_data/<car>")
-def analyse_data(car):
+@app.route("/show_results/<car>")
+def show_results(car):
     # to pokazuje
 
     print("oł je !")
     print(car)
 
-
     data = [
 
         (200, 120),
         (300, 150),
-        (400, 140),
-        (500, 180),
-        (600, 200),
+        (400, 140.32),
+        (500, 180.45),
+        (600, 200.5),
         (700, 220),
-        (800, 270),
+        (800, 170),
 
     ]
 
+    labels = [row[0] for row in data]
+    values = [row[1] for row in data]
 
-    labels =[row[0] for row in data]
-    values =[row[1] for row in data]
+    return render_template("show_results.html", labels=labels, values=values)
 
-
-    return render_template("spctr_results.html", labels=labels , values=values)
 
 # return render_template('form_test.html')
 # wyslij do BE
