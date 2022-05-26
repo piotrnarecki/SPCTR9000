@@ -7,9 +7,18 @@ from werkzeug.datastructures import FileStorage
 from frontend_utils.input_interpreter import InputInterpreter
 from frontend_utils.input_parameters import InputParameters
 from frontend_utils.file_interpreter import FileInterpreter
+from frontend_utils.chart_utils import ChartUtils
+
+import pandas as pd
 
 app = Flask(__name__)
 app.secret_key = "abc"
+
+#aby zainstalowac panda
+# w cmd w folderze projektu:
+# pip3 install wheel
+# pip3 install pandas
+#pip3 install openpyxl
 
 
 # WPISZ PONISZE KOMENTY W TERMINAL NA DOLE ABY URUCHOMIC
@@ -69,45 +78,10 @@ def show_results(preview):
     print("oł je !")
     print(preview)
 
+    chart_utils = ChartUtils()
 
+    data=chart_utils.fileToChartData(preview)
 
-
-
-
-    match preview:
-        case 'p1':
-            data = [
-                (200, 20),
-                (300, 50),
-                (400, 40.32),
-                (500, 80.45),
-                (600, 00.5),
-                (700, 120),
-                (800, 70),
-            ]
-        case 'p2':
-            data = [
-
-                (200, 120),
-                (300, 150),
-                (400, 140.32),
-                (500, 180.45),
-                (600, 200.5),
-                (700, 220),
-                (800, 170),
-
-            ]
-        case 'p3':
-            data = [
-
-
-                (400, 140.32),
-                (500, 180.45),
-                (600, 200.5),
-                (700, 220),
-
-
-            ]
 
 
 
