@@ -3,103 +3,361 @@
 <head>
     <meta charset="UTF-8">
     <title>Set parameters</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap.css') }}">
-    <!--    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/my_styles.css') }}">-->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script type="text/javascript" src="js/reveal_form.js"></script>
     <script type="text/javascript" src="js/populate_data.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/my_styles.css') }}">
+
+
 
 </head>
 <body>
 
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
 
-<!--    <h5 >SPCTR9000</h5>-->
-
-<!--    <hr class="my-4">-->
-
-
-<div class="container">
-    <form method="post" enctype="multipart/form-data">
-
-
-        <!--        <div class="row">-->
-        <!--            <h4>Parameters</h4>-->
-
-        <!--        </div>-->
+                    <li class="nav-item ">
+                        <a href="{{ url_for('get_file')}}" class="nav-link">File</a>
+                    </li>
 
 
-        <div class="row">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url_for('get_params')}}" class="nav-link">Params</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="{{ url_for('show_results', preview='p1')}}">Results</a>
+                    </li>
 
 
-            <!--pierwsza kolumna-->
+                      <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Export</a>
+                    </li>
+                </ul>
 
 
-            <div class="col-2">
+                <ul class="nav navbar-nav ms-auto">
+                    <li class="nav-item ">
+
+                        <h5 class="my_light_text">"file"</h5>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
 
 
-                <p>
-                    <!--Smooth-->
-                <h5>Smooth</h5>
-                <input type="radio" name="smooth_radio" id="smooth_sg" value="sg" checked>
-                <label>
-                    SG
-                </label>
-                </input>
+<div class="main_background">
+
+    <div class="my_jumbotron" align="center">
+        <div class="container">
+            <form method="post" enctype="multipart/form-data">
 
 
-                <input type="radio" name="smooth_radio" id="smooth_fft" value="fft"
-                >
-                <label>
-                    FFT
-                </label>
-                </input>
+                <!--        <div class="row">-->
+                <!--            <h4>Parameters</h4>-->
 
-                <br>
-                <label>Window size</label>
-                <input type="number" id="smooth_window_size" name="smooth_window_size" min="1" max="5" required
-                       value="1">
-                </p>
-
-                <!--Range-->
-                <p>
-
-                <h5>Range</h5>
+                <!--        </div>-->
 
 
-                <input type="radio" name="range_radio" id="range_1" checked value="range_1">
-                <label>
-                    Range 1
-                </label>
-                </input>
-
-                <br>
-                <input type="radio" name="range_radio" id="range_2" value="range_2"
-                >
-                <label>
-                    Range 2
-                </label>
-                </input>
+                <div class="row">
 
 
-                <div>
-                    <input type="radio" name="range_radio" id="range_custom" value="custom_range" required>
-                    <label>Custom</label>
-                    </input>
-                    <div class="reveal-if-active">
+                    <!--pierwsza kolumna-->
 
 
-                        <label>from</label>
-
-                        <input type="number" id="range_from" name="range_from" min="1000" max="2000"
-                               class="require-if-active" value="1400">
-                        <label>to</label>
-                        </input>
+                    <div class="col-4">
+                        <div class="inside_box">
 
 
-                        <input type="number" id="range_to" name="range_to" min="1000" max="2000"
-                               class="require-if-active"
-                               value="1600">
-                        <label></label>
-                        </input>
+                            <p>
+                                <!--Smooth-->
+                            <h5>Smooth</h5>
+                            <div class="text_align_left">
+
+                                <input type="radio" name="smooth_radio" id="smooth_sg" value="sg" checked>
+                                <label>
+                                    SG
+                                </label>
+                                </input>
+
+
+                                <input type="radio" name="smooth_radio" id="smooth_fft" value="fft"
+                                >
+                                <label>
+                                    FFT
+                                </label>
+                                </input>
+
+                                <br>
+                                <label>Window size</label>
+                                <input type="number" id="smooth_window_size" name="smooth_window_size" min="1" max="5"
+                                       required
+                                       value="1">
+
+                            </div>
+
+                            </p>
+
+                            <!--Range-->
+                            <p>
+                            <hr>
+                            <h5>Range</h5>
+                            <div class="text_align_left">
+
+                                <input type="radio" name="range_radio" id="range_1" checked value="range_1">
+                                <label>
+                                    Range 1
+                                </label>
+                                </input>
+
+                                <br>
+                                <input type="radio" name="range_radio" id="range_2" value="range_2"
+                                >
+                                <label>
+                                    Range 2
+                                </label>
+                                </input>
+
+
+                                <div>
+                                    <input type="radio" name="range_radio" id="range_custom" value="custom_range"
+                                           required>
+                                    <label>Custom</label>
+                                    </input>
+                                    <div class="reveal-if-active">
+
+
+                                        <label>from</label>
+
+                                        <input type="number" id="range_from" name="range_from" min="1000" max="2000"
+                                               class="require-if-active" value="1400">
+                                        <label>to</label>
+                                        </input>
+
+
+                                        <input type="number" id="range_to" name="range_to" min="1000" max="2000"
+                                               class="require-if-active"
+                                               value="1600">
+                                        <label></label>
+                                        </input>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            </p>
+
+                            <hr>
+                            <!--    Smooth (range selected) -->
+
+                            <h5>Smooth (range selected)</h5>
+                            <div class="text_align_left">
+                                <input type="radio" name="smooth_range_radio" id="smooth_range_sg" value="sg" checked>
+                                <label>
+                                    SG
+                                </label>
+                                </input>
+
+
+                                <input type="radio" name="smooth_range_radio" id="smooth_range_fft" value="fft"
+                                >
+                                <label>
+                                    FFT
+                                </label>
+                                </input>
+
+                                <br>
+                                <label>Window size</label>
+                                <input type="number" id="smooth_range_window_size" name="smooth_range_window_size"
+                                       min="1"
+                                       max="5"
+                                       required value="1">
+                            </div>
+                            </p>
+
+                            <hr>
+                            <p>
+                            <h5>Baseline</h5>
+                            <div class="text_align_left">
+                                <input type="radio" name="baseline_radio" id="baseline_auto" checked
+                                       value="baseline_auto">
+                                <label>
+                                    Auto
+                                </label>
+                                </input>
+
+                                <div>
+                                    <input type="radio" name="baseline_radio" id="baseline_custom"
+                                           value="baseline_custom"
+                                           required>
+                                    <label>Custom</label>
+                                    </input>
+                                    <div class="reveal-if-active">
+
+
+                                        <label>from</label>
+
+                                        <input type="number" id="baseline_from" name="baseline_from" min="1" max="5"
+                                               class="require-if-active" value="1">
+                                        <label>to</label>
+                                        </input>
+
+
+                                        <input type="number" id="baseline_to" name="baseline_to" min="1" max="5"
+                                               class="require-if-active"
+                                               value="2">
+                                        <label></label>
+                                        </input>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            </p>
+
+                        </div>
+                    </div>
+
+
+                    <!--druga kolumna-->
+                    <div class="col-4">
+                        <div class="inside_box">
+
+                            <p>
+                            <h5>Data normalize</h5>
+                            <div class="text_align_left">
+
+                                <input type="radio" name="data_normalize_radio" id="data_normalize_none" checked
+                                       value="data_normalize_none">
+                                <label>
+                                    None
+                                </label>
+                                </input>
+
+                                <br>
+
+                                <input type="radio" name="data_normalize_radio" id="data_normalize_amide1"
+                                       value="data_normalize_amide1">
+                                <label>
+                                    Relative to Amide I
+                                </label>
+                                </input>
+
+                                <br>
+
+                                <input type="radio" name="data_normalize_radio" id="data_normalize_amide2"
+                                       value="data_normalize_amide2">
+                                <label>
+                                    Relative to Amide II
+                                </label>
+                                </input>
+
+                            </div>
+                            </p>
+                            <hr>
+                            <p>
+
+                            <h5>Smooth second derivative</h5>
+                            <div class="text_align_left">
+                                <input type="radio" name="smooth_second_radio" id="smooth_derivative_sg" value="sg"
+                                       checked>
+                                <label>
+                                    SG
+                                </label>
+                                </input>
+
+
+                                <input type="radio" name="smooth_second_radio" id="smooth_derivative_fft" value="fft"
+                                >
+                                <label>
+                                    FFT
+                                </label>
+                                </input>
+
+                                <br>
+                                <label>Window size</label>
+                                <input type="number" id="smooth_second_window_size" name="smooth_second_window_size"
+                                       min="1"
+                                       max="10"
+                                       required
+                                       value="1">
+                                </p>
+                            </div>
+                            <hr>
+                            <p>
+                            <h5>Deconvolution</h5>
+                            <div class="text_align_left">
+
+                                <input type="radio" name="deconvolution_radio" id="deconvolution_lorentz" checked
+                                       value="deconvolution_lorentz">
+                                <label>
+                                    Lorentz
+                                </label>
+                                </input>
+
+                                <br>
+
+                                <input type="radio" name="deconvolution_radio" id="deconvolution_voigt"
+                                       value="deconvolution_voigt">
+                                <label>
+                                    Voigt
+                                </label>
+                                </input>
+
+                                <br>
+
+                                <input type="radio" name="deconvolution_radio" id="deconvolution_gauss"
+                                       value="deconvolution_gauss">
+                                <label>
+                                    Gauss
+                                </label>
+                                </input>
+                            </div>
+
+                            </p>
+
+                            <hr>
+                            <p>
+
+                            <h5>Number of bands</h5>
+                            <div class="text_align_left">
+                                <div>
+                                    <input type="number" id="number_value" name="number_value" min="1" max="5"
+                                           class="require-if-active" value="1">
+                                    </input>
+
+                                </div>
+
+
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+
+
+                        <img class="my_img_big" src="/static/images/logo.png">
+
+                        <p>
+                            <button class="my_big_button" type="submit">Analyze</button>
+
+
+                        </p>
 
 
                     </div>
@@ -107,206 +365,19 @@
 
                 </div>
 
-                </p>
 
-
-                <!--    Smooth (range selected) -->
-
-                <h5>Smooth (range selected)</h5>
-                <input type="radio" name="smooth_range_radio" id="smooth_range_sg" value="sg" checked>
-                <label>
-                    SG
-                </label>
-                </input>
-
-
-                <input type="radio" name="smooth_range_radio" id="smooth_range_fft" value="fft"
-                >
-                <label>
-                    FFT
-                </label>
-                </input>
-
-                <br>
-                <label>Window size</label>
-                <input type="number" id="smooth_range_window_size" name="smooth_range_window_size" min="1" max="5"
-                       required value="1">
-                </p>
-
-
-                <p>
-                <h5>Baseline</h5>
-
-                <input type="radio" name="baseline_radio" id="baseline_auto" checked value="baseline_auto">
-                <label>
-                    Auto
-                </label>
-                </input>
-
-                <div>
-                    <input type="radio" name="baseline_radio" id="baseline_custom" value="baseline_custom" required>
-                    <label>Custom</label>
-                    </input>
-                    <div class="reveal-if-active">
-
-
-                        <label>from</label>
-
-                        <input type="number" id="baseline_from" name="baseline_from" min="1" max="5"
-                               class="require-if-active" value="1">
-                        <label>to</label>
-                        </input>
-
-
-                        <input type="number" id="baseline_to" name="baseline_to" min="1" max="5"
-                               class="require-if-active"
-                               value="2">
-                        <label></label>
-                        </input>
-
-
-                    </div>
-                </div>
-
-                </p>
-
-
-            </div>
-
-
-            <!--druga kolumna-->
-            <div class="col-2">
-                <p>
-                <h5>Data normalize</h5>
-
-
-                <input type="radio" name="data_normalize_radio" id="data_normalize_none" checked
-                       value="data_normalize_none">
-                <label>
-                    None
-                </label>
-                </input>
-
-                <br>
-
-                <input type="radio" name="data_normalize_radio" id="data_normalize_amide1"
-                       value="data_normalize_amide1">
-                <label>
-                    Relative to Amide I
-                </label>
-                </input>
-
-                <br>
-
-                <input type="radio" name="data_normalize_radio" id="data_normalize_amide2"
-                       value="data_normalize_amide2">
-                <label>
-                    Relative to Amide II
-                </label>
-                </input>
-
-
-                </p>
-
-                <p>
-
-                <h5>Smooth second derivative</h5>
-                <input type="radio" name="smooth_second_radio" id="smooth_derivative_sg" value="sg" checked>
-                <label>
-                    SG
-                </label>
-                </input>
-
-
-                <input type="radio" name="smooth_second_radio" id="smooth_derivative_fft" value="fft"
-                >
-                <label>
-                    FFT
-                </label>
-                </input>
-
-                <br>
-                <label>Window size</label>
-                <input type="number" id="smooth_second_window_size" name="smooth_second_window_size" min="1" max="10"
-                       required
-                       value="1">
-                </p>
-
-
-                <p>
-                <h5>Deconvolution</h5>
-
-
-                <input type="radio" name="deconvolution_radio" id="deconvolution_lorentz" checked
-                       value="deconvolution_lorentz">
-                <label>
-                    Lorentz
-                </label>
-                </input>
-
-                <br>
-
-                <input type="radio" name="deconvolution_radio" id="deconvolution_voigt"
-                       value="deconvolution_voigt">
-                <label>
-                    Voigt
-                </label>
-                </input>
-
-                <br>
-
-                <input type="radio" name="deconvolution_radio" id="deconvolution_gauss"
-                       value="deconvolution_gauss">
-                <label>
-                    Gauss
-                </label>
-                </input>
-
-
-                </p>
-
-                <p>
-
-                <h5>Number of bands</h5>
-
-                <div>
-                    <input type="number" id="number_value" name="number_value" min="1" max="5"
-                           class="require-if-active" value="1">
-                    </input>
-
-                </div>
-
-
-                </p>
-
-
-            </div>
-
-
-            <div class="col-2">
-
-
-                <p>
-                    <button type="submit">Analyze</button>
-
-
-                </p>
-
-
-            </div>
+            </form>
 
 
         </div>
 
-
-    </form>
-
+    </div>
 
 </div>
 
-<footer>
+<!--<footer>-->
 
-    <h1 align="center">Footer</h1>
-</footer>
+<!--    <h1 align="center">Footer</h1>-->
+<!--</footer>-->
 </body>
 </html>

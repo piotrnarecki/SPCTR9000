@@ -9,6 +9,8 @@ import os
 
 class FileInterpreter:
     # ta piekna funkcja bedzie pobierac plik
+
+
     def interpret_file(self, request):
         if request.files['file'].filename != '':
             file = request.files['file']
@@ -16,10 +18,22 @@ class FileInterpreter:
             # file.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
             # file.save(os.path.join(app.root_path, 'input_files', secure_filename(file.filename)))
 
-            print(file.filename)
+
+            filename=file.filename
+
+            print(filename)
+
             # return 'file uploaded successfully'
             return True
         else:
             return False
             print("NO FILE ")
             # return redirect(url_for("load_data"))
+
+    def get_filename(self,request):
+        if request.files['file'].filename != '':
+            file = request.files['file']
+            filename = file.filename
+            return filename
+        else:
+            return ""
