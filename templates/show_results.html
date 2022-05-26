@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Load data</title>
+
+
+
+
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript" src="js/reveal_form.js"></script>
+    <script type="text/javascript" src="js/populate_data.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/my_styles.css') }}">
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap.css') }}">
+    <!--    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/my_styles.css') }}">-->
+    <script type="text/javascript" src="js/reveal_form.js"></script>
+    <script type="text/javascript" src="js/populate_data.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/charts.js@2.9.4/dist/Charts.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+
+<!--    <h5 >SPCTR9000</h5>-->
+
+<!--    <hr class="my-4">-->
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+
+                    <li class="nav-item ">
+                        <a href="{{ url_for('get_file')}}" class="nav-link">File</a>
+                    </li>
+
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url_for('get_params')}}" class="nav-link">Params</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ url_for('show_results', preview='p1')}}">Results</a>
+                    </li>
+
+
+                      <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Export</a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a href="#" class="dropdown-item">JPG</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">EXCEL</a>
+                        </div>
+                    </li>
+                </ul>
+
+
+                <ul class="nav navbar-nav ms-auto">
+                    <li class="nav-item ">
+
+                        <h5 class="my_light_text">file</h5>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<div class="main_background">
+
+     <div class="my_jumbotron" align="center">
+    <div class="container">
+    <form method="post" enctype="multipart/form-data">
+
+
+        <!--        <div class="row">-->
+        <!--            <h4>Parameters</h4>-->
+
+        <!--        </div>-->
+
+
+        <div class="row">
+
+
+            <!--pierwsza kolumna-->
+
+
+
+
+            <div class="col-9">
+
+
+<!--                <svg width="100%" height="90%">-->
+<!--                    <rect width="500" height="500" style="fill:rgb(128,0,0);stroke-width:3;stroke:rgb(0,0,0)"/>-->
+
+
+
+<!--                </svg>-->
+
+<canvas class="my_canvas" id="lineChart" ></canvas>
+<script>
+    var ctx=document.getElementById("lineChart").getContext("2d");
+    var lineChart = new Chart(ctx,{
+        type: "line",
+        data:{
+            labels: {{labels | safe}},
+            datasets:[
+            {
+            label:"Data points",
+            data:{{values | safe}},
+            fill:false,
+            borderColor: "rgb(90,192,192)",
+            lineTension: 0.1
+            }
+        ]
+        },
+    options:{
+            responsive:false
+    }
+    });
+
+
+
+</script>
+
+
+
+
+            </div>
+
+            <div class="col-3">
+
+
+<p>
+
+                <h5 class="my_light_text">Preview option</h5>
+                <!--                    <label for="preview_option">Preview option</label>-->
+
+
+                <ul>
+                    <li>
+                          <a href="{{ url_for('show_results',preview='p1')}}">Smooth (whole spectrum)</a>
+                    </li>
+                     <li>
+                          <a href="{{ url_for('show_results',preview='p2')}}">Range analyzed</a>
+                    </li>
+                     <li>
+                          <a href="{{ url_for('show_results',preview='p3')}}">Smooth (range selected)</a>
+                    </li>
+
+
+                </ul>
+
+
+
+<!--                <ul>-->
+<!--                    <li>-->
+<!--                        <button>option1-->
+<!--                        <a href="{{ url_for('get_file')}}" class="nav-link">File</a>-->
+<!--                        </button>-->
+<!--                                                <button>option2</button>-->
+<!--                        <button>option3</button>-->
+
+<!--                    </li>-->
+
+
+<!--                </ul>-->
+
+
+<!--                <select id="preview_option" name="preview_option">-->
+<!--                    <option value="smooth_all_spectrum">Smooth (all spectrum)</option>-->
+<!--                    <option value="range_analyzed">Range analyzed</option>-->
+<!--                    <option value="smooth_rang_selected">Smooth (range selected)</option>-->
+<!--                    <option value="baseline">Baseline</option>-->
+<!--                    <option value="data_normalize">Data normalize</option>-->
+<!--                    <option value="smooth_second_derivative">Smooth second derivative</option>-->
+<!--                    <option value="deconvolution">Deconvolution</option>-->
+
+<!--                </select>-->
+<!--                &lt;!&ndash;                    <input type="submit" value="Submit">&ndash;&gt;-->
+                </p>
+
+
+
+</div>
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </form>
+
+
+</div>
+</div>
+</div>
+
+
+
+</body>
+</html>

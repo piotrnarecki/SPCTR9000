@@ -1,0 +1,137 @@
+.reveal-if-active {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    font-size: 16px;
+    /*transform: scale(0.8);*/
+    transition: 0.5s;
+}
+
+
+input[type="radio"]:checked ~ .reveal-if-active,
+input[type="checkbox"]:checked ~ .reveal-if-active {
+    opacity: 1;
+    max-height: 100px; /* little bit of a magic number :( */
+    overflow: visible;
+}
+
+
+/*.center_div{*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    margin-top: -50px;*/
+/*    margin-left: -50px;*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*}*/
+
+/*.container_full_height{*/
+
+/*    min-height: 100%;*/
+/*  height: 100%;*/
+
+/*}*/
+
+/*input[type="radio"]:checked {*/
+/*    opacity: 1;*/
+/*    max-height: 100px;*/
+/*    padding: 10px 20px;*/
+/*    transform: scale(1);*/
+/*    overflow: visible;*/
+/*}*/
+
+
+.my_jumbotron {
+
+    background-color: #343a40;
+    padding: 2rem 2rem 2rem 2rem;
+    margin: 0rem ;
+    border-radius: 1rem;
+    align-content: center;
+    min-height: 100%;
+}
+
+.my_navbar {
+
+    background-color: silver;
+    height: 10vh;
+    margin-left: 10px
+
+;
+}
+
+.main_background {
+    padding: 2rem 2rem 2rem 2rem;
+    background: rgb(255, 0, 161);
+    background: radial-gradient(circle, rgba(255, 0, 161, 1) 0%, rgba(158, 0, 255, 1) 80%);
+margin: 0%;
+/*height: 650px;*/
+
+     height: 95vh;
+    /*min-height: 100%;*/
+}
+
+
+.inside_box{
+
+    background-color: white;
+    padding: 1rem 1rem 1rem 1rem;
+    margin: 0rem ;
+    border-radius: 1rem;
+    min-height: 200px;
+
+
+}
+
+
+.my_img{
+
+    height: auto;
+    width: auto;
+    max-width: 200px;
+    max-height: 200px;
+    margin: 10px;
+}
+
+.my_img_big{
+
+    height: auto;
+    width: auto;
+    max-width: 300px;
+    max-height: 300px;
+    margin: 10px;
+}
+
+
+.my_light_text{
+
+    margin: 1rem;
+    color: silver;
+
+
+}
+
+.text_align_left{
+
+    text-align: left;
+    margin-left: 30%;
+
+}
+
+.my_big_button{
+
+border-radius: 10%;
+
+background-color: silver;
+border: 1px solid yellow;
+
+}
+
+.my_canvas{
+
+    width: 100vh;
+    height: 100vh;
+
+
+}
