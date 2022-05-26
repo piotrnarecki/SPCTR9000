@@ -14,11 +14,12 @@ import pandas as pd
 app = Flask(__name__)
 app.secret_key = "abc"
 
-#aby zainstalowac panda
+
+# aby zainstalowac panda
 # w cmd w folderze projektu:
 # pip3 install wheel
 # pip3 install pandas
-#pip3 install openpyxl
+# pip3 install openpyxl
 
 
 # WPISZ PONISZE KOMENTY W TERMINAL NA DOLE ABY URUCHOMIC
@@ -63,11 +64,7 @@ def get_params():
         # dziala !
         print("INPUT DZIALA " + input_parameters.deconvolution_type)  # tak zeby sprawdzic czy dziala
 
-        # print("INPUT DZIALA " + input_parameters.preview_option)  # tak zeby sprawdzic czy dziala
-
-        car1 = 'p1'
-
-        return redirect(url_for("show_results", preview=car1))
+        return redirect(url_for("show_results", preview='p1'))
 
     else:
         return render_template("get_params.html")
@@ -80,16 +77,10 @@ def show_results(preview):
 
     chart_utils = ChartUtils()
 
-    data=chart_utils.fileToChartData(preview)
-
-
-
+    data = chart_utils.fileToChartData(preview)
 
     labels = [row[0] for row in data]
     values = [row[1] for row in data]
-
-
-
 
     return render_template("show_results.html", labels=labels, values=values)
 
@@ -102,6 +93,38 @@ def show_results(preview):
 # wyslij na FE
 
 
-@app.route("/export_results")
-def export_results():
-    return "Data exported"
+@app.route("/export_results/<export_type>", methods=['GET', 'POST'])
+def export_results(export_type):
+    if request.method == "GET":
+        print("EXPORTING")
+        # export file
+
+        if (export_type == 'csv'):
+
+            print("EXPORT CSV FILE")
+
+            csv = '1,2,3\n4,5,6\n'
+
+            # return Response(
+            #     csv,
+            #     mimetype="text/csv",
+            #     headers={"Content-disposition":
+            #                  "attachment; filename=exported_file.csv"})
+
+            return "Data exported"
+
+
+        else:
+
+            print("EXPORT JPG FILE")
+
+            return redirect(url_for("show_results", preview='p1'))
+
+        # end of export file
+
+
+
+    else:
+
+        print("GET XD")
+        return redirect(url_for("show_results", preview='p1'))
