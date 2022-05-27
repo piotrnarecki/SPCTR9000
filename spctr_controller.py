@@ -11,10 +11,6 @@ from frontend_utils.chart_utils import ChartUtils
 
 import pandas as pd
 
-app = Flask(__name__)
-app.secret_key = "abc"
-
-
 # aby zainstalowac panda
 # w cmd w folderze projektu:
 # pip3 install wheel
@@ -29,17 +25,18 @@ app.secret_key = "abc"
 # flask run
 
 
+app = Flask(__name__)
+app.secret_key = "abc"
+
+
 @app.route("/", methods=['GET', 'POST'])
 def get_file():
     if request.method == 'POST':
-
-        # tutaj beda robione jakies czary z plikiem xD
 
         file_interpreter = FileInterpreter()
         is_file_correct = file_interpreter.interpret_file(request)
 
         if (is_file_correct):
-            # filename = file_interpreter.get_filename(request)
 
             return redirect(url_for("get_params"))
         else:
@@ -72,9 +69,6 @@ def get_params():
 
 @app.route("/show_results/<preview>")
 def show_results(preview):
-    print("oł je !")
-    print(preview)
-
     chart_utils = ChartUtils()
 
     data = chart_utils.fileToChartData(preview)
@@ -83,14 +77,6 @@ def show_results(preview):
     values = [row[1] for row in data]
 
     return render_template("show_results.html", labels=labels, values=values)
-
-
-# return render_template('form_test.html')
-# wyslij do BE
-
-# odbierz od BE
-
-# wyslij na FE
 
 
 @app.route("/export_results/<export_type>", methods=['GET', 'POST'])
@@ -103,34 +89,13 @@ def export_results(export_type):
 
             print("EXPORT CSV FILE")
 
-            path=r"/Volumes/SD/Projects/PycharmProjects/pythonProject/SPCTR9000/instance/export/export_file.csv"
+            path = r"/Volumes/SD/Projects/PycharmProjects/pythonProject/SPCTR9000/instance/export/export_file.csv"
             return send_file(path, as_attachment=True)
         else:
+
+            # dodac metode zapisujaca wyniki
             return "svn exported"
-
-
-            # csv = '1,2,3\n4,5,6\n'
-            #
-            # # return Response(
-            # #     csv,
-            # #     mimetype="text/csv",
-            # #     headers={"Content-disposition":
-            # #                  "attachment; filename=exported_file.csv"})
-            #
-            # return "Data exported"
-
-
-        # else:
-        #
-        #     print("EXPORT JPG FILE")
-        #
-        #     return redirect(url_for("show_results", preview='p1'))
-
-        # end of export file
-
-
 
     else:
 
-        print("GET XD")
         return redirect(url_for("show_results", preview='p1'))

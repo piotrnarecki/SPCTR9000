@@ -1,23 +1,7 @@
-# import pandas as pd
 import numpy as np
 
 
 class ChartUtils:
-
-    # csv zamiast excel
-
-    # def chooseFile(preview):
-    #
-    #     match preview:
-    #         case 'p1':
-    #             file_name = 'excel1.xlsx'
-    #
-    #         case 'p2':
-    #             file_name = 'excel2.xlsx'
-    #         case 'p3':
-    #             file_name = 'excel3.xlsx'
-    #
-    #     return file_name
 
     def fileToChartData(self, preview):
 
@@ -43,7 +27,6 @@ class ChartUtils:
 
             case 'p7':
                 file_name = 'csv7.csv'
-
 
             case 'p8':
                 file_name = 'export_file.csv'

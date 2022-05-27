@@ -16,19 +16,13 @@
 
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap.css') }}">
-    <!--    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/my_styles.css') }}">-->
     <script type="text/javascript" src="js/reveal_form.js"></script>
     <script type="text/javascript" src="js/populate_data.js"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/charts.js@2.9.4/dist/Charts.min.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <body>
 
-
-<!--    <h5 >SPCTR9000</h5>-->
-
-<!--    <hr class="my-4">-->
 
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -80,13 +74,6 @@
         <div class="container">
             <form method="post" enctype="multipart/form-data">
 
-
-                <!--        <div class="row">-->
-                <!--            <h4>Parameters</h4>-->
-
-                <!--        </div>-->
-
-
                 <div class="row">
 
 
@@ -95,16 +82,8 @@
 
                     <div class="col-9">
 
-
-                        <!--                <svg width="100%" height="90%">-->
-                        <!--                    <rect width="500" height="500" style="fill:rgb(128,0,0);stroke-width:3;stroke:rgb(0,0,0)"/>-->
-
-
-                        <!--                </svg>-->
-
                         <canvas class="my_canvas" id="lineChart"></canvas>
                         <script>
-
 
 
                             var plotColor = "rgb(90,192,192)";
@@ -130,7 +109,7 @@
                                     labels: {{ labels | safe}},
                             datasets:[
                                 {
-                                    label: "Data points",
+                                    label: "Absorbance",
                                     data: {{values | safe}},
                             fill:false,
                                 borderColor
@@ -148,16 +127,8 @@
                             }
                             });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                             window.alert("Testing Saving Plot")
+//
                             //zapis grafu do pliku
-
-
-                            // var url=document.getElementById("my_canvas").toDataURL();
-	                        // document.getElementById("url").innerHTML=url;
-                            //
-                            //
-                            // window.alert(url);
-
 
 
                         </script>
@@ -171,8 +142,6 @@
                         <p>
 
                         <h5 class="my_light_text">Preview option</h5>
-                        <!--                    <label for="preview_option">Preview option</label>-->
-
 
                         <ul>
                             <li class="my_walkman_button">
@@ -209,71 +178,10 @@
                         </ul>
 
 
-<!--                        <div class="btn-group-vertical">-->
-
-<!--                        -->
-
-<!--                            <button type="button" class="btn btn-secondary">-->
-<!--                                    <a href="{{ url_for('show_results',preview='p1')}}"></a> Smooth (whole spectrum)</button>-->
-
-<!--                            <button type="button" class="btn btn-secondary">-->
-<!--                                    <a href="{{ url_for('show_results',preview='p2')}}"></a>Range analyzed</button>-->
-
-<!--                            <button type="button" class="btn btn-secondary">-->
-<!--                                    <a href="{{ url_for('show_results',preview='p3')}}"></a>Smooth (range selected)</button>-->
-<!--                            -->
-<!--                            <button type="button" class="btn btn-secondary">-->
-<!--                                    <a href="{{ url_for('show_results',preview='p4')}}"></a>Baseline</button>-->
-<!--                            -->
-<!--                            <button type="button" class="btn btn-secondary">-->
-<!--                                    <a href="{{ url_for('show_results',preview='p5')}}"></a>Data normalize</button>-->
-<!--                            -->
-<!--                            <button type="button" class="btn btn-secondary">-->
-<!--                                    <a href="{{ url_for('show_results',preview='p6')}}"></a>Smooth second derivative</button>-->
-<!--                            -->
-<!--                            <button type="button" class="btn btn-secondary">-->
-<!--                                    <a href="{{ url_for('show_results',preview='p7')}}"></a>Deconvolution</button>-->
-<!--                            -->
-<!--&lt;!&ndash;  <button type="button" class="btn btn-secondary">Left</button>&ndash;&gt;-->
-<!--&lt;!&ndash;  <button type="button" class="btn btn-secondary">Middle</button>&ndash;&gt;-->
-<!--&lt;!&ndash;  <button type="button" class="btn btn-secondary">Right</button>&ndash;&gt;-->
-
-
-
-<!--                        </div>-->
-
-
-
-                        <!--                <ul>-->
-                        <!--                    <li>-->
-                        <!--                        <button>option1-->
-                        <!--                        <a href="{{ url_for('get_file')}}" class="nav-link">File</a>-->
-                        <!--                        </button>-->
-                        <!--                                                <button>option2</button>-->
-                        <!--                        <button>option3</button>-->
-
-                        <!--                    </li>-->
-
-
-                        <!--                </ul>-->
-
-
-                        <!--
-                        <!--                    <option value="data_normalize">Data normalize</option>-->
-                        <!--                    <option value="smooth_second_derivative">Smooth second derivative</option>-->
-                        <!--                    <option value="deconvolution">Deconvolution</option>-->
-
-                        <!--                </select>-->
-                        <!--                &lt;!&ndash;                    <input type="submit" value="Submit">&ndash;&gt;-->
-                        </p>
-
+ </p>
 
                     </div>
-
-
                 </div>
-
-
         </div>
 
 
