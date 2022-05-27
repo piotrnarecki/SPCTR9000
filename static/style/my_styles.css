@@ -148,3 +148,44 @@ border: 1px solid yellow;
     list-style-type: none;
 }
 
+
+.on_the_bottom{
+
+
+    margin-top: 15%;
+
+
+}
+
+.analyze_button{
+
+     min-width: 100px;
+    padding: 2rem;
+    margin: 7px;
+    background-color: darkgray;
+    border-radius: 1rem;
+    font-size: 2rem;
+    color: silver;
+
+
+    /*background-color: rgb(255, 0, 161);*/
+    background: rgb(255, 0, 161);
+    background: radial-gradient(circle, rgba(255, 0, 161, 1) 0%, rgba(158, 0, 255, 1) 80%);
+}
+
+
+.analyze_button:hover{
+
+     min-width: 100px;
+    padding: 2rem;
+    margin: 7px;
+    background-color: darkgray;
+    border-radius: 1rem;
+    font-size: 2rem;
+    color: white;
+
+
+    /*background-color: rgb(255, 0, 161);*/
+    background: rgb(255, 0, 161);
+    background: radial-gradient(circle, rgba(255, 0, 161, 1) 0%, rgba(158, 0, 255, 1) 80%);
+}

@@ -21,6 +21,7 @@ class ChartUtils:
 
     def fileToChartData(self, preview):
 
+        deli = ';'
         match preview:
             case 'p1':
                 file_name = 'csv1.csv'
@@ -43,8 +44,13 @@ class ChartUtils:
             case 'p7':
                 file_name = 'csv7.csv'
 
-        path = "/Volumes/SD/Projects/PycharmProjects/pythonProject/SPCTR9000/csv_files/" + file_name
 
-        data = np.genfromtxt(path, delimiter=';')
+            case 'p8':
+                file_name = 'export_file.csv'
+                deli = ','
+
+        path = "/Volumes/SD/Projects/PycharmProjects/pythonProject/SPCTR9000/instance/export/" + file_name
+
+        data = np.genfromtxt(path, delimiter=deli)
 
         return data

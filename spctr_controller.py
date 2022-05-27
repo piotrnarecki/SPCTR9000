@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort, request, url_for, flash, redirect
+from flask import Flask, render_template, abort, request, url_for, flash, redirect, send_file
 
 # ...
 from werkzeug.utils import secure_filename
@@ -103,22 +103,28 @@ def export_results(export_type):
 
             print("EXPORT CSV FILE")
 
-            csv = '1,2,3\n4,5,6\n'
-
-            # return Response(
-            #     csv,
-            #     mimetype="text/csv",
-            #     headers={"Content-disposition":
-            #                  "attachment; filename=exported_file.csv"})
-
-            return "Data exported"
-
-
+            path=r"/Volumes/SD/Projects/PycharmProjects/pythonProject/SPCTR9000/instance/export/export_file.csv"
+            return send_file(path, as_attachment=True)
         else:
+            return "svn exported"
 
-            print("EXPORT JPG FILE")
 
-            return redirect(url_for("show_results", preview='p1'))
+            # csv = '1,2,3\n4,5,6\n'
+            #
+            # # return Response(
+            # #     csv,
+            # #     mimetype="text/csv",
+            # #     headers={"Content-disposition":
+            # #                  "attachment; filename=exported_file.csv"})
+            #
+            # return "Data exported"
+
+
+        # else:
+        #
+        #     print("EXPORT JPG FILE")
+        #
+        #     return redirect(url_for("show_results", preview='p1'))
 
         # end of export file
 

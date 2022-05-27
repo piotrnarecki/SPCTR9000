@@ -105,6 +105,8 @@
                         <canvas class="my_canvas" id="lineChart"></canvas>
                         <script>
 
+
+
                             var plotColor = "rgb(90,192,192)";
 
                             var colors = ["rgb(255,0,0)", "rgb(0,255,0)",
@@ -118,6 +120,8 @@
 
                             plotColor = colors[colorIndex];
                             // window.alert(plotColor);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
                             var ctx = document.getElementById("lineChart").getContext("2d");
                             var lineChart = new Chart(ctx, {
@@ -140,10 +144,20 @@
                             },
                             options:{
                                 responsive:false
-
+                                // onAnimationComplete: done
                             }
-                            })
-                            ;
+                            });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                             window.alert("Testing Saving Plot")
+                            //zapis grafu do pliku
+
+
+                            // var url=document.getElementById("my_canvas").toDataURL();
+	                        // document.getElementById("url").innerHTML=url;
+                            //
+                            //
+                            // window.alert(url);
+
 
 
                         </script>
@@ -187,7 +201,47 @@
                                 <a href="{{ url_for('show_results',preview='p7')}}">Deconvolution</a>
                             </li>
 
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p8')}}">CUSTOM</a>
+                            </li>
+
+
                         </ul>
+
+
+<!--                        <div class="btn-group-vertical">-->
+
+<!--                        -->
+
+<!--                            <button type="button" class="btn btn-secondary">-->
+<!--                                    <a href="{{ url_for('show_results',preview='p1')}}"></a> Smooth (whole spectrum)</button>-->
+
+<!--                            <button type="button" class="btn btn-secondary">-->
+<!--                                    <a href="{{ url_for('show_results',preview='p2')}}"></a>Range analyzed</button>-->
+
+<!--                            <button type="button" class="btn btn-secondary">-->
+<!--                                    <a href="{{ url_for('show_results',preview='p3')}}"></a>Smooth (range selected)</button>-->
+<!--                            -->
+<!--                            <button type="button" class="btn btn-secondary">-->
+<!--                                    <a href="{{ url_for('show_results',preview='p4')}}"></a>Baseline</button>-->
+<!--                            -->
+<!--                            <button type="button" class="btn btn-secondary">-->
+<!--                                    <a href="{{ url_for('show_results',preview='p5')}}"></a>Data normalize</button>-->
+<!--                            -->
+<!--                            <button type="button" class="btn btn-secondary">-->
+<!--                                    <a href="{{ url_for('show_results',preview='p6')}}"></a>Smooth second derivative</button>-->
+<!--                            -->
+<!--                            <button type="button" class="btn btn-secondary">-->
+<!--                                    <a href="{{ url_for('show_results',preview='p7')}}"></a>Deconvolution</button>-->
+<!--                            -->
+<!--&lt;!&ndash;  <button type="button" class="btn btn-secondary">Left</button>&ndash;&gt;-->
+<!--&lt;!&ndash;  <button type="button" class="btn btn-secondary">Middle</button>&ndash;&gt;-->
+<!--&lt;!&ndash;  <button type="button" class="btn btn-secondary">Right</button>&ndash;&gt;-->
+
+
+
+<!--                        </div>-->
+
 
 
                         <!--                <ul>-->
