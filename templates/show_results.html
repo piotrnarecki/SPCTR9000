@@ -5,9 +5,7 @@
     <title>Load data</title>
 
 
-
-
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script type="text/javascript" src="js/reveal_form.js"></script>
@@ -18,19 +16,13 @@
 
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap.css') }}">
-    <!--    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/my_styles.css') }}">-->
     <script type="text/javascript" src="js/reveal_form.js"></script>
     <script type="text/javascript" src="js/populate_data.js"></script>
-<!--<script src="https://cdn.jsdelivr.net/npm/charts.js@2.9.4/dist/Charts.min.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <body>
 
-
-<!--    <h5 >SPCTR9000</h5>-->
-
-<!--    <hr class="my-4">-->
 
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -52,12 +44,12 @@
                     </li>
 
 
-                      <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Export</a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a href="#" class="dropdown-item">JPG</a>
+                            <a href="{{ url_for('export_results',export_type='csv')}}" class="dropdown-item">csv</a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">EXCEL</a>
+                            <a href="{{ url_for('export_results',export_type='svg')}}" class="dropdown-item">svg</a>
                         </div>
                     </li>
                 </ul>
@@ -78,138 +70,127 @@
 
 <div class="main_background">
 
-     <div class="my_jumbotron" align="center">
-    <div class="container">
-    <form method="post" enctype="multipart/form-data">
+    <div class="my_jumbotron" align="center">
+        <div class="container">
+            <form method="post" enctype="multipart/form-data">
+
+                <div class="row">
 
 
-        <!--        <div class="row">-->
-        <!--            <h4>Parameters</h4>-->
-
-        <!--        </div>-->
+                    <!--pierwsza kolumna-->
 
 
-        <div class="row">
+                    <div class="col-9">
+
+                        <canvas class="my_canvas" id="lineChart"></canvas>
+                        <script>
 
 
-            <!--pierwsza kolumna-->
+                            var plotColor = "rgb(90,192,192)";
+
+                            var colors = ["rgb(255,0,0)", "rgb(0,255,0)",
+                                "rgb(0,0,255)", "rgb(255,0,255)", "rgb(255,255,0)",
+                                "rgb(255,255,255)", "rgb(255,125,0)"];
 
 
+                            var colorIndex = Math.floor(Math.random() * colors.length);
+                            // window.alert(colorIndex);
 
 
-            <div class="col-9">
+                            plotColor = colors[colorIndex];
+                            // window.alert(plotColor);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-<!--                <svg width="100%" height="90%">-->
-<!--                    <rect width="500" height="500" style="fill:rgb(128,0,0);stroke-width:3;stroke:rgb(0,0,0)"/>-->
+                            var ctx = document.getElementById("lineChart").getContext("2d");
+                            var lineChart = new Chart(ctx, {
+                                type: "line",
+                                data: {
+                                    labels: {{ labels | safe}},
+                            datasets:[
+                                {
+                                    label: "Absorbance",
+                                    data: {{values | safe}},
+                            fill:false,
+                                borderColor
+                            :
+                            plotColor,
+                                lineTension
+                            :
+                            0.1
+                            }
+                            ]
+                            },
+                            options:{
+                                responsive:false
+                                // onAnimationComplete: done
+                            }
+                            });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+                            //zapis grafu do pliku
 
 
-
-<!--                </svg>-->
-
-<canvas class="my_canvas" id="lineChart" ></canvas>
-<script>
-    var ctx=document.getElementById("lineChart").getContext("2d");
-    var lineChart = new Chart(ctx,{
-        type: "line",
-        data:{
-            labels: {{labels | safe}},
-            datasets:[
-            {
-            label:"Data points",
-            data:{{values | safe}},
-            fill:false,
-            borderColor: "rgb(90,192,192)",
-            lineTension: 0.1
-            }
-        ]
-        },
-    options:{
-            responsive:false
-    }
-    });
+                        </script>
 
 
+                    </div>
 
-</script>
-
-
-
-
-            </div>
-
-            <div class="col-3">
+                    <div class="col-3">
 
 
-<p>
+                        <p>
 
-                <h5 class="my_light_text">Preview option</h5>
-                <!--                    <label for="preview_option">Preview option</label>-->
+                        <h5 class="my_light_text">Preview option</h5>
 
+                        <ul>
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p1')}}">Smooth (whole spectrum)</a>
+                            </li>
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p2')}}">Range analyzed</a>
+                            </li>
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p3')}}">Smooth (range selected)</a>
+                            </li>
 
-                <ul>
-                    <li>
-                          <a href="{{ url_for('show_results',preview='p1')}}">Smooth (whole spectrum)</a>
-                    </li>
-                     <li>
-                          <a href="{{ url_for('show_results',preview='p2')}}">Range analyzed</a>
-                    </li>
-                     <li>
-                          <a href="{{ url_for('show_results',preview='p3')}}">Smooth (range selected)</a>
-                    </li>
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p4')}}">Baseline</a>
+                            </li>
 
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p5')}}">Data normalize</a>
+                            </li>
 
-                </ul>
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p6')}}">Smooth second derivative</a>
+                            </li>
 
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p7')}}">Deconvolution</a>
+                            </li>
 
-
-<!--                <ul>-->
-<!--                    <li>-->
-<!--                        <button>option1-->
-<!--                        <a href="{{ url_for('get_file')}}" class="nav-link">File</a>-->
-<!--                        </button>-->
-<!--                                                <button>option2</button>-->
-<!--                        <button>option3</button>-->
-
-<!--                    </li>-->
-
-
-<!--                </ul>-->
-
-
-<!--                <select id="preview_option" name="preview_option">-->
-<!--                    <option value="smooth_all_spectrum">Smooth (all spectrum)</option>-->
-<!--                    <option value="range_analyzed">Range analyzed</option>-->
-<!--                    <option value="smooth_rang_selected">Smooth (range selected)</option>-->
-<!--                    <option value="baseline">Baseline</option>-->
-<!--                    <option value="data_normalize">Data normalize</option>-->
-<!--                    <option value="smooth_second_derivative">Smooth second derivative</option>-->
-<!--                    <option value="deconvolution">Deconvolution</option>-->
-
-<!--                </select>-->
-<!--                &lt;!&ndash;                    <input type="submit" value="Submit">&ndash;&gt;-->
-                </p>
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p8')}}">CUSTOM</a>
+                            </li>
 
 
-
-</div>
-
+                        </ul>
 
 
+ </p>
 
-            </div>
-
-
+                    </div>
+                </div>
         </div>
 
 
-    </form>
+        </form>
 
 
+    </div>
 </div>
 </div>
-</div>
-
 
 
 </body>

@@ -1,72 +1,39 @@
-import pandas as pd
+import numpy as np
 
 
 class ChartUtils:
 
-    # def chooseFile(preview):
-    #
-    #     match preview:
-    #         case 'p1':
-    #             file_name = 'excel1.xlsx'
-    #
-    #         case 'p2':
-    #             file_name = 'excel2.xlsx'
-    #         case 'p3':
-    #             file_name = 'excel3.xlsx'
-    #
-    #     return file_name
-
     def fileToChartData(self, preview):
 
+        deli = ';'
         match preview:
             case 'p1':
-                file_name = 'excel1.xlsx'
-                data = [
-                    (200, 20),
-                    (300, 50),
-                    (400, 40.32),
-                    (500, 80.45),
-                    (600, 100.5),
-                    (700, 120),
-                    (800, 70),
-                    (900, 120),
-                    (1000, 270)
-                ]
+                file_name = 'csv1.csv'
 
             case 'p2':
-                file_name = 'excel2.xlsx'
-                data = [
-                    (200, 120),
-                    (300, 150),
-                    (400, 140.32),
-                    (500, 180.45),
-                    (600, 200.5),
-                    (700, 220),
-                    (800, 170),
-                    (900, 220),
-                    (1000, 170)
-                ]
+                file_name = 'csv2.csv'
+
             case 'p3':
-                file_name = 'excel3.xlsx'
-                data = [
+                file_name = 'csv3.csv'
 
-                    (400, 410.32),
-                    (500, 380.45),
-                    (600, 500.5),
-                    (700, 520),
-                    (800, 470),
-                    (900, 400),
-                    (1000, 540)
-                ]
+            case 'p4':
+                file_name = 'csv4.csv'
 
-        # file_name = chooseFile(preview)
+            case 'p5':
+                file_name = 'csv5.csv'
 
-        file_path = r'excel_files/' + file_name
+            case 'p6':
+                file_name = 'csv6.csv'
 
-        df = pd.read_excel(
-            file_path)  # place "r" before the path string to address special character, such as '\'. Don't forget to put the file name at the end of the path + '.xlsx'
+            case 'p7':
+                file_name = 'csv7.csv'
 
-        print(df)
-        # mylist = df['A1:A20'].tolist()
+            case 'p8':
+                file_name = 'export_file.csv'
+                deli = ','
+
+        path = "/Volumes/SD/Projects/PycharmProjects/pythonProject/SPCTR9000/instance/export/" + file_name
+
+        data = np.genfromtxt(path, delimiter=deli)
 
         return data
