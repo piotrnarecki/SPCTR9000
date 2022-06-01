@@ -219,9 +219,11 @@ class SPCTR():
     
     def normalize(self,
                   normalize_type: str) -> None:
-        if normalize_type == 'amide1':
+        if normalize_type == 'data_normalize_none':
+            pass
+        elif normalize_type == 'data_normalize_amide1':
             self.normalize_amide1()
-        elif normalize_type == 'amide2':
+        elif normalize_type == 'data_normalize_amide2':
             self.normalize_amide2()
         else:
             print('ERROR! Incorrect normalization type!')
@@ -277,37 +279,3 @@ class SPCTR():
         """
         np.savetxt(('.\\exported_files\\' + name + '.csv'), self.data, delimiter = ',', fmt='%f')
         return
-    
-# =============================================================================
-# # %%TEST
-# import matplotlib.pyplot as plt
-# 
-# path = 'C:\\Users\\Home\\Studies\\kursy\\Semestr III\\Języki programowania\\SPCTR9000-michal\\imported_files\\widmo_z_ATR.csv'
-# 
-# first_SG = 51
-# second_SG = 31
-# 
-# spectrum = np.genfromtxt(path, delimiter = ',')
-# 
-# spctr = SPCTR(spectrum)
-# spctr.plot_data('SPECTRUM')
-# spctr.smooth_SG(first_SG)
-# spctr.cut_auto1()
-# spctr.baseline_auto()
-# spctr.normalize_amide2()
-# spctr.smooth_SG(second_SG)
-# spctr.second_derivative()
-# spctr.find_minimums()
-# minimums_index = spctr.find_minimums()
-# 
-# spectrum2 = np.genfromtxt(path, delimiter = ',')
-# 
-# final = SPCTR(spectrum2)
-# final.smooth_SG(first_SG)
-# final.cut_auto1()
-# final.baseline_auto()
-# final.normalize_amide2()
-# final.smooth_SG(second_SG)
-# final.draw_points(minimums_index)
-# 
-# =============================================================================

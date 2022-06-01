@@ -7,7 +7,7 @@ class InputParameters:
         self.cut_limit_bottom: int = 1000
         self.cut_limit_top: int = 2000
         self.baseline_type: str = 'auto'
-        self.normalize_type: str = 'amide2'
+        self.normalize_type: str = 'amide2' #'data_normalize_none' / 'data_normalize_amide1' / 'data_normalize_amide2'
         self.smooth_second_type: str = 'SG'
         self.smooth_second_parameter: float = 31.0
         self.preview_option: str = 'preview'
