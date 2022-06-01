@@ -4,6 +4,8 @@
 from BaselineRemoval import BaselineRemoval
 from scipy.interpolate import UnivariateSpline
 from scipy.signal import savgol_filter
+from scipy.signal import argrelextrema
+import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -19,7 +21,18 @@ class SPCTR():
         """
         self.data: np.array = data
         
+    
+    def plot_data(self,
+                  title: str) -> None:
+        """
         
+        """
+        plt.figure()
+        plt.plot(self.data[:, 0], self.data[:, 1], '.', markersize = 2)
+        plt.title(title)
+        return
+    
+    
     def smooth_SG(self,
                   window_length: int) -> None:
         """
@@ -54,7 +67,22 @@ class SPCTR():
             
             self.data[:, 1] = signal_ifft
         except Exception as exc:
-            print(exc)    
+            print(exc)
+        return
+    
+    
+    def smooth(self,
+               smooth_type: str,
+               smooth_parameter: float) -> None:
+        """
+        
+        """
+        if smooth_type == 'SG':
+            self.smooth_SG(int(smooth_parameter))
+        elif smooth_type == 'FFT':
+            self.smooth_FFT(smooth_parameter)
+        else:
+            print('ERROR! Incorrect smoothing type!')
         return
     
     
@@ -92,7 +120,7 @@ class SPCTR():
     
     def cut_manual(self,
                    limit_bottom: int,
-                   limit_top: int) -> np.array:
+                   limit_top: int) -> None:
         """
         
         """
@@ -105,6 +133,24 @@ class SPCTR():
         return
     
     
+    def cut(self,
+            cut_type: str,
+            limit_bottom: int,
+            limit_top: int) -> None:
+        """
+        
+        """
+        if cut_type == 'auto1':
+            self.cut_auto1()
+        elif cut_type == 'auto2':
+            self.cut_auto2()
+        elif cut_type == 'manual':
+            self.cut_manual(limit_bottom, limit_top)
+        else:
+            print('ERROR! Incorrect cutting type!')
+        return
+    
+    
     def baseline_auto(self) -> None:
         """
         
@@ -113,6 +159,8 @@ class SPCTR():
         
         try:
             self.data[:, 1] = BaselineRemoval(self.data[:, 1]).ModPoly(POLYNOMINAL_ORDER)
+            minimums_index = argrelextrema(self.data[:, 1], np.less)[0]
+            self.data = self.data[minimums_index[0]:minimums_index[-1], :]
         except Exception as exc:
             print(exc)
         return
@@ -137,6 +185,7 @@ class SPCTR():
             #self.data[:, 1][self.data[:, 1] < 0] = 0
         except Exception as exc:
             print(exc)
+        self.plot_data('BASELINE MANUAL')
         return
         
     
@@ -149,9 +198,7 @@ class SPCTR():
         
         idx_bottom = (np.abs(self.data[:, 0] - LIMIT_BOTTOM)).argmin()
         idx_top = (np.abs(self.data[:, 0] - LIMIT_TOP)).argmin()
-        print(idx_top)
         max_idx = (np.argmax(self.data[idx_bottom:idx_top + 1, 1]) + idx_bottom)
-        print(max_idx)
         self.data[:, 1] = self.data[:, 1] / self.data[max_idx, 1]
         return
         
@@ -170,94 +217,97 @@ class SPCTR():
         return
     
     
-    def derivative(self):
+    def normalize(self,
+                  normalize_type: str) -> None:
+        if normalize_type == 'amide1':
+            self.normalize_amide1()
+        elif normalize_type == 'amide2':
+            self.normalize_amide2()
+        else:
+            print('ERROR! Incorrect normalization type!')
+        return
+    
+    
+    def second_derivative(self) -> None:
         """
         
         """
-        DERIVATIVE_ORDER = 0
+        DERIVATIVE_ORDER = 2
         
         data_spl = UnivariateSpline(self.data[:, 0], self.data[:, 1], s = 0, k = 4)
-        derivative_2nd = data_spl.derivative(n = DERIVATIVE_ORDER)(self.data[:, 0])
-        return derivative_2nd
+        self.data[:, 1] = data_spl.derivative(n = DERIVATIVE_ORDER)(self.data[:, 0])
+        return
+    
+    
+    def find_minimums(self) -> np.array:
+        """
+        
+        """
+        WINDOW_LENGTH = 21
+        
+        self.smooth_SG(WINDOW_LENGTH)
+        minimums_index = argrelextrema(self.data[:, 1], np.less)[0]
+        self.data = self.data[minimums_index]
+        #self.plot_data('MINIMUMS')
+        #plt.plot(minimums[:, 0], minimums[:, 1], '.')
+        return minimums_index
+    
+    
+    def spectrum_minimums(self, minimums_index):
+        """
+        
+        """
+        WINDOW_LENGTH = 21
+        
+        self.smooth_SG(WINDOW_LENGTH)
+        self.data = self.data[minimums_index]
+        #self.plot_data('PEAKS')
+        #x_axis = self.data[:, 0][minimums_index]
+        #y_axis = self.data[:, 1][minimums_index]
+        #plt.plot(x_axis, y_axis, '.')
+        #for idx, txt in enumerate(x_axis):
+        #    plt.annotate(round(txt), (x_axis[idx], y_axis[idx]))
+        return
         
         
-# %%TEST
-import matplotlib.pyplot as plt
-
-path = 'C:\\Users\\Home\\Studies\\kursy\\Semestr III\\Języki programowania\\SPCTR9000-michal\\input_files\\widmo_z_ATR.csv'
-
-spectrum = np.genfromtxt(path, delimiter = ',')
-plt.figure()
-plt.plot(spectrum[:, 0], spectrum[:, 1])
-plt.title('SPECTRUM')
-
-spctr = SPCTR(spectrum)
-spctr.smooth_SG(99)
-plt.figure()
-plt.plot(spctr.data[:, 0], spctr.data[:, 1])
-plt.title('SG FILTER')
-
-spctr = SPCTR(spectrum)
-spctr.smooth_FFT(0.0009)
-plt.figure()
-plt.plot(spctr.data[:, 0], spctr.data[:, 1])
-plt.title('FFT FILTER')
-
-spctr = SPCTR(spectrum)
-spctr.cut_auto1()
-plt.figure()
-plt.plot(spctr.data[:, 0], spctr.data[:, 1])
-plt.title('AUTO CUT AMIDE I & II')
-
-spctr = SPCTR(spectrum)
-spctr.cut_auto2()
-plt.figure()
-plt.plot(spctr.data[:, 0], spctr.data[:, 1])
-plt.title('AUTO CUT AMIDE I')
-
-spctr = SPCTR(spectrum)
-spctr.cut_manual(1000, 2000)
-plt.figure()
-plt.plot(spctr.data[:, 0], spctr.data[:, 1])
-plt.title('MANUAL CUT')
-
-spctr = SPCTR(spectrum)
-spctr.smooth_SG(99)
-spctr.cut_auto1()
-spctr.baseline_auto()
-plt.figure()
-plt.plot(spctr.data[:, 0], spctr.data[:, 1])
-plt.title('BASELINE AUTO')
-
-spctr = SPCTR(spectrum)
-spctr.smooth_SG(99)
-spctr.cut_auto1()
-spctr.baseline_manual(1500, 1700)
-plt.figure()
-plt.plot(spctr.data[:, 0], spctr.data[:, 1])
-plt.title('BASELINE MANUAL')
-
-spctr = SPCTR(spectrum)
-spctr.normalize_amide1()
-plt.figure()
-plt.plot(spctr.data[:, 0], spctr.data[:, 1])
-plt.title('NORMALIZE AMIDE I')
-
-spctr = SPCTR(spectrum)
-spctr.smooth_SG(99)
-spctr.cut_auto1()
-spctr.baseline_auto()
-spctr.normalize_amide2()
-plt.figure()
-plt.plot(spctr.data[:, 0], spctr.data[:, 1])
-plt.title('NORMALIZE AMIDE II')
-
-spctr = SPCTR(spectrum)
-spctr.smooth_SG(99)
-spctr.cut_auto1()
-spctr.baseline_auto()
-spctr.normalize_amide1()
-derivative_2nd = spctr.derivative()
-plt.figure()
-plt.plot(spctr.data[:, 0], derivative_2nd)
-plt.title("2'nd DERIVATIVE")
+    def save_data(self,
+                  name: str) -> None:
+        """
+        
+        """
+        np.savetxt(('.\\exported_files\\' + name + '.csv'), self.data, delimiter = ',', fmt='%f')
+        return
+    
+# =============================================================================
+# # %%TEST
+# import matplotlib.pyplot as plt
+# 
+# path = 'C:\\Users\\Home\\Studies\\kursy\\Semestr III\\Języki programowania\\SPCTR9000-michal\\imported_files\\widmo_z_ATR.csv'
+# 
+# first_SG = 51
+# second_SG = 31
+# 
+# spectrum = np.genfromtxt(path, delimiter = ',')
+# 
+# spctr = SPCTR(spectrum)
+# spctr.plot_data('SPECTRUM')
+# spctr.smooth_SG(first_SG)
+# spctr.cut_auto1()
+# spctr.baseline_auto()
+# spctr.normalize_amide2()
+# spctr.smooth_SG(second_SG)
+# spctr.second_derivative()
+# spctr.find_minimums()
+# minimums_index = spctr.find_minimums()
+# 
+# spectrum2 = np.genfromtxt(path, delimiter = ',')
+# 
+# final = SPCTR(spectrum2)
+# final.smooth_SG(first_SG)
+# final.cut_auto1()
+# final.baseline_auto()
+# final.normalize_amide2()
+# final.smooth_SG(second_SG)
+# final.draw_points(minimums_index)
+# 
+# =============================================================================
