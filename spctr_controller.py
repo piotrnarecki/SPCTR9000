@@ -11,6 +11,15 @@ from frontend_utils.chart_utils import ChartUtils
 
 import pandas as pd
 
+from backend_utils.nlzr import NLZR
+from backend_utils.rdr import RDR
+from backend_utils.spctr import SPCTR
+from frontend_utils.input_parameters import InputParameters
+
+from backend_utils.nlzr import NLZR
+from backend_utils.rdr import RDR
+from backend_utils.spctr import SPCTR
+
 # aby zainstalowac panda
 # w cmd w folderze projektu:
 # pip3 install wheel
@@ -58,8 +67,10 @@ def get_params():
         # input_parameters - obiekt tej PRZEPIEKNEJ klasy zawiera wszystkie parametry do obliczen
         input_parameters = input_interpreter.interpret_params(request)
 
-        # dziala !
-        print("INPUT DZIALA " + input_parameters.deconvolution_type)  # tak zeby sprawdzic czy dziala
+
+        #obliczenia
+        nlzr = NLZR(input_parameters, RDR, SPCTR)
+        nlzr.pipeline()
 
         return redirect(url_for("show_results", preview='p1'))
 
@@ -69,9 +80,14 @@ def get_params():
 
 @app.route("/show_results/<preview>")
 def show_results(preview):
+
+
     chart_utils = ChartUtils()
 
     data = chart_utils.fileToChartData(preview)
+
+
+
 
     labels = [row[0] for row in data]
     values = [row[1] for row in data]

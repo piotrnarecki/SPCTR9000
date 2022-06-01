@@ -44,6 +44,7 @@ class InputInterpreter:
         baseline_type = request.form['baseline_radio']
         baseline_from = 0
         baseline_to = 100
+
         if baseline_type == "baseline_auto":
             baseline_from = 0
             baseline_to = 100
