@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Load data</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript" src="js/reveal_form.js"></script>
+    <script type="text/javascript" src="js/populate_data.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/my_styles.css') }}">
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap.css') }}">
+    <script type="text/javascript" src="js/reveal_form.js"></script>
+    <script type="text/javascript" src="js/populate_data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+
+                    <li class="nav-item ">
+                        <a href="{{ url_for('get_file')}}" class="nav-link">File</a>
+                    </li>
+
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url_for('get_params')}}" class="nav-link">Params</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ url_for('show_results', preview='p1')}}">Results</a>
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Export</a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a href="{{ url_for('export_results',export_type='csv')}}" class="dropdown-item">csv</a>
+<!--                            <div class="dropdown-divider"></div>-->
+<!--                            -->
+
+<!--                            <a href="{{ url_for('show_results',preview='p1')}}" class="dropdown-item">png</a>-->
+
+                        </div>
+                    </li>
+                </ul>
+
+
+<!--                <ul class="nav navbar-nav ms-auto">-->
+<!--                    <li class="nav-item ">-->
+
+<!--                        <h5 class="my_light_text">file</h5>-->
+
+<!--                    </li>-->
+<!--                </ul>-->
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<div class="main_background">
+
+    <div class="my_jumbotron" align="center">
+        <div class="container">
+            <form method="post" enctype="multipart/form-data">
+
+                <div class="row">
+
+
+                    <!--pierwsza kolumna-->
+
+
+                    <div class="col-9">
+
+                        <canvas class="my_canvas" id="lineChart"></canvas>
+
+                        <script>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+                            var minExistFlask = "{{min_exist|safe}}";
+
+
+
+                            var minExist = false ;
+                            if(minExistFlask == "True"){
+                              minExist = true  ;
+                            }else {
+                                minExist = false;
+                            }
+
+
+                            var ctx = document.getElementById("lineChart").getContext("2d");;
+                            if(minExist) {
+
+
+                                    var lineChart = new Chart(ctx, {
+
+
+                                type: 'scatter',
+  data: {
+    datasets: [
+    	{
+        label: 'absorbance',
+
+
+
+        data: {{main_data}},
+
+        showLine: true,
+        fill: false,
+        borderColor: 'rgba(0, 200, 0, 1)'
+    	},
+      {
+        label: 'minimums',
+
+          data: {{min_data}},
+
+
+
+        pointRadius: 10,
+        showLine: false,
+        fill: false,
+        borderColor: 'rgba(200, 0, 0, 1)'
+    	}
+    ]
+  },
+  options: {
+    tooltips: {
+      mode: 'index',
+      intersect: false,
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero:true
+        }
+      }]
+    },
+  }
+
+                            });
+
+
+                            }else {
+
+                                 var lineChartWithoutMin = new Chart(ctx, {
+
+
+                                type: 'scatter',
+  data: {
+    datasets: [
+    	{
+        label: 'absorbance',
+
+
+
+        data: {{main_data}},
+
+        showLine: true,
+        fill: false,
+        borderColor: 'rgba(0, 200, 0, 1)'
+    	},
+    ]
+  },
+  options: {
+    tooltips: {
+      mode: 'index',
+      intersect: false,
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero:true
+        }
+      }]
+    },
+  }
+
+                            });
+
+
+
+
+
+
+                            }
+
+
+
+
+                            var plotColor = "rgb(90,192,192)";
+
+                            var colors = ["rgb(255,0,0)", "rgb(0,255,0)",
+                                "rgb(0,0,255)", "rgb(255,0,255)", "rgb(255,255,0)",
+                                "rgb(255,255,255)", "rgb(255,125,0)"];
+
+
+                            var colorIndex = Math.floor(Math.random() * colors.length);
+
+                            // var minExist={{min_exist|safe}};
+                            // window.alert(minExist);
+
+
+                            // window.alert("hello");
+
+                            plotColor = colors[colorIndex];
+                            // window.alert(plotColor);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                            // var plotMin={{min_exist|safe}};
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+                            //zapis grafu do pliku
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+                        </script>
+
+
+                    </div>
+
+                    <div class="col-3">
+
+
+                        <p>
+
+                        <h5 class="my_light_text">Preview option</h5>
+
+                        <ul>
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p1')}}">raw</a>
+                            </li>
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p2')}}">smooth</a>
+                            </li>
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p3')}}">cut</a>
+                            </li>
+
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p4')}}">baseline</a>
+                            </li>
+
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p5')}}">normalize</a>
+                            </li>
+
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p6')}}">normalize smooth</a>
+                            </li>
+
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p7')}}">2nd derivative</a>
+                            </li>
+
+                            <li class="my_walkman_button">
+                                <a href="{{ url_for('show_results',preview='p8')}}">normalize smooth minimums</a>
+                            </li>
+
+
+                        </ul>
+
+
+ </p>
+
+                    </div>
+                </div>
+        </div>
+
+
+        </form>
+
+
+    </div>
+</div>
+</div>
+
+
+</body>
+</html>
