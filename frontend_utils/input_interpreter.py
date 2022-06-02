@@ -44,6 +44,7 @@ class InputInterpreter:
         baseline_type = request.form['baseline_radio']
         baseline_from = 0
         baseline_to = 100
+
         if baseline_type == "baseline_auto":
             baseline_from = 0
             baseline_to = 100
@@ -64,7 +65,7 @@ class InputInterpreter:
         # print("smooth range: " + smooth_second_type + " , " + smooth_second_window_size)
 
         # deconvolution
-        deconvolution_type = request.form['deconvolution_radio']
+        # deconvolution_type = request.form['deconvolution_radio']
         # print("deconvolution type: " + deconvolution_type)
 
         # number of bands
@@ -90,7 +91,6 @@ class InputInterpreter:
                                            data_normalize_type,
                                            smooth_second_type,
                                            smooth_second_window_size,
-                                           deconvolution_type,
                                            bands_value
                                            )
 

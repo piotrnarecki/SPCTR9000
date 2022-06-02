@@ -44,13 +44,13 @@
                 </ul>
 
 
-                <ul class="nav navbar-nav ms-auto">
-                    <li class="nav-item ">
+<!--                <ul class="nav navbar-nav ms-auto">-->
+<!--                    <li class="nav-item ">-->
 
-                        <h5 class="my_light_text">"file"</h5>
+<!--                        <h5 class="my_light_text">"file"</h5>-->
 
-                    </li>
-                </ul>
+<!--                    </li>-->
+<!--                </ul>-->
             </div>
         </div>
     </nav>
@@ -95,9 +95,9 @@
 
                                 <br>
                                 <label>Window size</label>
-                                <input type="number" id="smooth_window_size" name="smooth_window_size" min="1" max="5"
+                                <input type="number" id="smooth_window_size" name="smooth_window_size" min="3" max="99"
                                        required
-                                       value="1">
+                                       value="3">
 
                             </div>
 
@@ -111,7 +111,7 @@
 
                                 <input type="radio" name="range_radio" id="range_1" checked value="range_1">
                                 <label>
-                                    Range 1
+                                    1490-1750
                                 </label>
                                 </input>
 
@@ -119,7 +119,7 @@
                                 <input type="radio" name="range_radio" id="range_2" value="range_2"
                                 >
                                 <label>
-                                    Range 2
+                                    1590-1750
                                 </label>
                                 </input>
 
@@ -176,9 +176,9 @@
                                 <br>
                                 <label>Window size</label>
                                 <input type="number" id="smooth_range_window_size" name="smooth_range_window_size"
-                                       min="1"
-                                       max="5"
-                                       required value="1">
+                                       min="3"
+                                       max="99"
+                                       required value="3">
                             </div>
                             </p>
 
@@ -193,32 +193,32 @@
                                 </label>
                                 </input>
 
-                                <div>
-                                    <input type="radio" name="baseline_radio" id="baseline_custom"
-                                           value="baseline_custom"
-                                           required>
-                                    <label>Custom</label>
-                                    </input>
-                                    <div class="reveal-if-active">
+<!--                                <div>-->
+<!--                                    <input type="radio" name="baseline_radio" id="baseline_custom"-->
+<!--                                           value="baseline_custom"-->
+<!--                                           required>-->
+<!--                                    <label>Custom</label>-->
+<!--                                    </input>-->
+<!--                                    <div class="reveal-if-active">-->
 
 
-                                        <label>from</label>
+<!--                                        <label>from</label>-->
 
-                                        <input type="number" id="baseline_from" name="baseline_from" min="1" max="5"
-                                               class="require-if-active" value="1">
-                                        <label>to</label>
-                                        </input>
-
-
-                                        <input type="number" id="baseline_to" name="baseline_to" min="1" max="5"
-                                               class="require-if-active"
-                                               value="2">
-                                        <label></label>
-                                        </input>
+<!--                                        <input type="number" id="baseline_from" name="baseline_from" min="1" max="5"-->
+<!--                                               class="require-if-active" value="1">-->
+<!--                                        <label>to</label>-->
+<!--                                        </input>-->
 
 
-                                    </div>
-                                </div>
+<!--                                        <input type="number" id="baseline_to" name="baseline_to" min="1" max="5"-->
+<!--                                               class="require-if-active"-->
+<!--                                               value="2">-->
+<!--                                        <label></label>-->
+<!--                                        </input>-->
+
+
+<!--                                    </div>-->
+<!--                                </div>-->
                             </div>
                             </p>
 
@@ -284,44 +284,44 @@
                                 <br>
                                 <label>Window size</label>
                                 <input type="number" id="smooth_second_window_size" name="smooth_second_window_size"
-                                       min="1"
-                                       max="10"
+                                       min="3"
+                                       max="99"
                                        required
-                                       value="1">
+                                       value="3">
                                 </p>
                             </div>
-                            <hr>
-                            <p>
-                            <h5>Deconvolution</h5>
-                            <div class="text_align_left">
+<!--                            <hr>-->
+<!--                            <p>-->
+<!--                            <h5>Deconvolution</h5>-->
+<!--                            <div class="text_align_left">-->
 
-                                <input type="radio" name="deconvolution_radio" id="deconvolution_lorentz" checked
-                                       value="deconvolution_lorentz">
-                                <label>
-                                    Lorentz
-                                </label>
-                                </input>
+<!--                                <input type="radio" name="deconvolution_radio" id="deconvolution_lorentz" checked-->
+<!--                                       value="deconvolution_lorentz">-->
+<!--                                <label>-->
+<!--                                    Lorentz-->
+<!--                                </label>-->
+<!--                                </input>-->
 
-                                <br>
+<!--                                <br>-->
 
-                                <input type="radio" name="deconvolution_radio" id="deconvolution_voigt"
-                                       value="deconvolution_voigt">
-                                <label>
-                                    Voigt
-                                </label>
-                                </input>
+<!--                                <input type="radio" name="deconvolution_radio" id="deconvolution_voigt"-->
+<!--                                       value="deconvolution_voigt">-->
+<!--                                <label>-->
+<!--                                    Voigt-->
+<!--                                </label>-->
+<!--                                </input>-->
 
-                                <br>
+<!--                                <br>-->
 
-                                <input type="radio" name="deconvolution_radio" id="deconvolution_gauss"
-                                       value="deconvolution_gauss">
-                                <label>
-                                    Gauss
-                                </label>
-                                </input>
-                            </div>
+<!--                                <input type="radio" name="deconvolution_radio" id="deconvolution_gauss"-->
+<!--                                       value="deconvolution_gauss">-->
+<!--                                <label>-->
+<!--                                    Gauss-->
+<!--                                </label>-->
+<!--                                </input>-->
+<!--                            </div>-->
 
-                            </p>
+<!--                            </p>-->
 
                             <hr>
                             <p>
