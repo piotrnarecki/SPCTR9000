@@ -8,6 +8,8 @@ from frontend_utils.input_interpreter import InputInterpreter
 from frontend_utils.input_parameters import InputParameters
 from frontend_utils.file_interpreter import FileInterpreter
 from frontend_utils.chart_utils import ChartUtils
+from frontend_utils.download_utils import DownloadUtils
+
 
 import pandas as pd
 
@@ -64,11 +66,9 @@ def get_params():
 
         input_interpreter = InputInterpreter()
 
-        # input_parameters - obiekt tej PRZEPIEKNEJ klasy zawiera wszystkie parametry do obliczen
         input_parameters = input_interpreter.interpret_params(request)
 
-
-        #obliczenia
+        # obliczenia
         nlzr = NLZR(input_parameters, RDR, SPCTR)
         nlzr.pipeline()
 
@@ -80,19 +80,64 @@ def get_params():
 
 @app.route("/show_results/<preview>")
 def show_results(preview):
-
-
     chart_utils = ChartUtils()
 
-    data = chart_utils.fileToChartData(preview)
+    main_data = chart_utils.fileToChartData(preview)[0]
+    min_data = chart_utils.fileToChartData(preview)[1]
+
+    min_exist =chart_utils.fileToChartData(preview)[2]
+
+    print("PRINT MIN")
+    print(min_exist)
+
+
+    #
+    #
+    #
+    #
+    #
+    # print("main data")
+    # print(main_data)
+    #
+    #
+    #
+    #
+    #
+    #
+    # #
+    #
+    # main_labels = [row[0] for row in main_data]
+    # main_values = [row[1] for row in main_data]
+    #
+    # min_labels = [row[0] for row in min_data]
+    # min_values = [row[1] for row in min_data]
+    #
+    # # heights = [168, 170, 180, 190, 200]
+    # # weights = [70, 80, 90, 100, 70]
+    # newlist = []
+    # for labels, values in zip(main_labels, main_values):
+    #     newlist.append({'x': labels, 'y': values})
+    # my_data = str(newlist).replace('\'', '')
+    #
+    # newlist = []
+    # for labels, values in zip(min_labels, min_values):
+    #     newlist.append({'x': labels, 'y': values})
+    # my_data_2 = str(newlist).replace('\'', '')
 
 
 
+    # main_labels =  main_data
+    # main_values =  main_data
+    # min_labels = min_data
+    # min_values = min_data
 
-    labels = [row[0] for row in data]
-    values = [row[1] for row in data]
 
-    return render_template("show_results.html", labels=labels, values=values)
+    # return render_template("show_results.html", main_data=main_data  )
+
+    return render_template("show_results.html", main_data=main_data ,min_data=min_data, min_exist=min_exist )
+
+
+    # return render_template("show_results.html", main_labels=main_labels, main_values=main_values, min_labels=min_labels, min_values=min_values )
 
 
 @app.route("/export_results/<export_type>", methods=['GET', 'POST'])
@@ -105,8 +150,17 @@ def export_results(export_type):
 
             print("EXPORT CSV FILE")
 
-            path = r"/Volumes/SD/Projects/PycharmProjects/pythonProject/SPCTR9000/instance/export/export_file.csv"
-            return send_file(path, as_attachment=True)
+            download_utils = DownloadUtils()
+            stream = download_utils.downloadFiles()
+
+            return send_file(
+                stream,
+                as_attachment=True,
+                attachment_filename='spctr9000_results.zip'
+            )
+
+
+
         else:
 
             # dodac metode zapisujaca wyniki

@@ -10,6 +10,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/instance/export/7a.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/instance/export/7b.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/instance/export/csv2.csv">
           <value>
             <Attribute>

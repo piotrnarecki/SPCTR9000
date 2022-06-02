@@ -65,7 +65,7 @@ class InputInterpreter:
         # print("smooth range: " + smooth_second_type + " , " + smooth_second_window_size)
 
         # deconvolution
-        deconvolution_type = request.form['deconvolution_radio']
+        # deconvolution_type = request.form['deconvolution_radio']
         # print("deconvolution type: " + deconvolution_type)
 
         # number of bands
@@ -91,7 +91,6 @@ class InputInterpreter:
                                            data_normalize_type,
                                            smooth_second_type,
                                            smooth_second_window_size,
-                                           deconvolution_type,
                                            bands_value
                                            )
 
