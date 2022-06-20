@@ -40,6 +40,9 @@ app = Flask(__name__)
 app.secret_key = "abc"
 
 
+
+# metoda otwierajaca okno strony glownej
+# jesli uzytkownik wybierze plik do analizy to zostanie on wczytany a okno z wyborem parametrów zostanie otwarte
 @app.route("/", methods=['GET', 'POST'])
 def get_file():
     if request.method == 'POST':
@@ -54,30 +57,33 @@ def get_file():
             flash("enter Excel file")
             return render_template("get_file.html")
 
-
     else:
         return render_template("get_file.html")
         flash("")
 
-
+# metoda pobierajaca od uzytkownika parametry analizy
+# po wybraniu parametrow zaczyna sie analiza
 @app.route("/get_params", methods=['GET', 'POST'])
 def get_params():
     if request.method == "POST":
 
+        #instancja obiektu klasy odpowiedzialnej za przetwarzanie wejscia z UI
         input_interpreter = InputInterpreter()
 
+        #instancja obiektu klasy odpowiedzialnej za przekazywanie parametrow wejsciowych na backend
         input_parameters = input_interpreter.interpret_params(request)
 
-        # obliczenia
+        # instancja obiektu klasy odpowiedzialnej za analize danych
         nlzr = NLZR(input_parameters, RDR, SPCTR)
         nlzr.pipeline()
 
+        #przekierowanie na okno z wynikami analizy
         return redirect(url_for("show_results", preview='p1'))
 
     else:
         return render_template("get_params.html")
 
-
+# metoda wyswietlajaca wyniki analizy
 @app.route("/show_results/<preview>")
 def show_results(preview):
     chart_utils = ChartUtils()
@@ -87,84 +93,28 @@ def show_results(preview):
 
     min_exist =chart_utils.fileToChartData(preview)[2]
 
-    print("PRINT MIN")
-    print(min_exist)
-
-
-    #
-    #
-    #
-    #
-    #
-    # print("main data")
-    # print(main_data)
-    #
-    #
-    #
-    #
-    #
-    #
-    # #
-    #
-    # main_labels = [row[0] for row in main_data]
-    # main_values = [row[1] for row in main_data]
-    #
-    # min_labels = [row[0] for row in min_data]
-    # min_values = [row[1] for row in min_data]
-    #
-    # # heights = [168, 170, 180, 190, 200]
-    # # weights = [70, 80, 90, 100, 70]
-    # newlist = []
-    # for labels, values in zip(main_labels, main_values):
-    #     newlist.append({'x': labels, 'y': values})
-    # my_data = str(newlist).replace('\'', '')
-    #
-    # newlist = []
-    # for labels, values in zip(min_labels, min_values):
-    #     newlist.append({'x': labels, 'y': values})
-    # my_data_2 = str(newlist).replace('\'', '')
-
-
-
-    # main_labels =  main_data
-    # main_values =  main_data
-    # min_labels = min_data
-    # min_values = min_data
-
-
-    # return render_template("show_results.html", main_data=main_data  )
-
+    #przekazywanie danych z backendu na frontend
     return render_template("show_results.html", main_data=main_data ,min_data=min_data, min_exist=min_exist )
 
 
-    # return render_template("show_results.html", main_labels=main_labels, main_values=main_values, min_labels=min_labels, min_values=min_values )
-
-
+# metoda odpowiedzialna za eksport danych
 @app.route("/export_results/<export_type>", methods=['GET', 'POST'])
 def export_results(export_type):
     if request.method == "GET":
-        print("EXPORTING")
-        # export file
-
-        if (export_type == 'csv'):
-
-            print("EXPORT CSV FILE")
-
-            download_utils = DownloadUtils()
-            stream = download_utils.downloadFiles()
-
-            return send_file(
-                stream,
-                as_attachment=True,
-                attachment_filename='spctr9000_results.zip'
-            )
 
 
+        print("EXPORT CSV FILE")
 
-        else:
+        download_utils = DownloadUtils()
+        stream = download_utils.downloadFiles()
 
-            # dodac metode zapisujaca wyniki
-            return "svn exported"
+        #eksport wynikow w postaci zipa z plikami csv
+        return send_file(
+            stream,
+            as_attachment=True,
+            attachment_filename='spctr9000_results.zip'
+        )
+
 
     else:
 

@@ -5,7 +5,7 @@ from io import BytesIO
 from zipfile import ZipFile
 import os
 
-
+#klasa odpowiedzalna za eksport wynikow analizy
 class DownloadUtils:
 
     def downloadFiles(self):

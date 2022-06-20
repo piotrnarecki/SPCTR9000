@@ -11,6 +11,7 @@ app = Flask(__name__)
 uploads_dir = os.path.join(app.instance_path, 'uploads')
 os.makedirs(uploads_dir, exist_ok=True)
 
+#klasa odpowiedzalna za zapisanie pliku i skopowanie go do pozniejszej analizy
 class FileInterpreter:
 
     def interpret_file(self, request):
@@ -22,7 +23,6 @@ class FileInterpreter:
             filename = file.filename
             print(filename)
 
-            # kopiuje do drugiego folderu
             src_path = r"/Volumes/SD/Projects/PycharmProjects/pythonProject/SPCTR9000/instance/uploads/input_file.csv"
             dst_path = r"/Volumes/SD/Projects/PycharmProjects/pythonProject/SPCTR9000/instance/export/export_file.csv"
             shutil.copy(src_path, dst_path)
@@ -33,11 +33,3 @@ class FileInterpreter:
             return False
             print("NO FILE ")
 
-
-    # def get_filename(self,request):
-    #     if request.files['file'].filename != '':
-    #         file = request.files['file']
-    #         filename = file.filename
-    #         return filename
-    #     else:
-    #         return ""

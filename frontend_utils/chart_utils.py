@@ -1,6 +1,6 @@
 import numpy as np
 
-
+#klasa odpowiedzialna za zamiane danych z pliku csv z analiza na dane do wykresow
 class ChartUtils:
 
     def fileToChartData(self, preview):
@@ -60,8 +60,5 @@ class ChartUtils:
         for labels, values in zip(min_labels, min_values):
             min_list.append({'x': labels, 'y': values})
         min_data = str(min_list).replace('\'', '')
-
-
-
 
         return main_data, min_data, min_exist

@@ -24,13 +24,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/instance/export/csv2.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value=";" />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/instance/uploads/input_file.csv">
           <value>
             <Attribute>

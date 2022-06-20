@@ -58,13 +58,7 @@
                 </ul>
 
 
-<!--                <ul class="nav navbar-nav ms-auto">-->
-<!--                    <li class="nav-item ">-->
 
-<!--                        <h5 class="my_light_text">file</h5>-->
-
-<!--                    </li>-->
-<!--                </ul>-->
             </div>
         </div>
     </nav>
@@ -89,8 +83,6 @@
 
                         <script>
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
                             var minExistFlask = "{{min_exist|safe}}";
 
@@ -150,9 +142,11 @@
     },
     scales: {
       yAxes: [{
-        ticks: {
-          beginAtZero:true
-        }
+
+          scaleLabel: {
+        display: true,
+        labelString: 'probability'
+      }
       }]
     },
   }
@@ -193,8 +187,15 @@
     scales: {
       yAxes: [{
         ticks: {
-          beginAtZero:true
-        }
+          beginAtZero:true,
+
+        },
+          scaleLabel: {
+        display: true,
+        labelString: 'probability'
+      }
+
+
       }]
     },
   }
@@ -209,65 +210,10 @@
                             }
 
 
-
-
-                            var plotColor = "rgb(90,192,192)";
-
-                            var colors = ["rgb(255,0,0)", "rgb(0,255,0)",
-                                "rgb(0,0,255)", "rgb(255,0,255)", "rgb(255,255,0)",
-                                "rgb(255,255,255)", "rgb(255,125,0)"];
-
-
-                            var colorIndex = Math.floor(Math.random() * colors.length);
-
-                            // var minExist={{min_exist|safe}};
-                            // window.alert(minExist);
-
-
-                            // window.alert("hello");
-
-                            plotColor = colors[colorIndex];
-                            // window.alert(plotColor);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                            // var plotMin={{min_exist|safe}};
-
-
-
-
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-                            //zapis grafu do pliku
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
                         </script>
-
 
                     </div>
 
